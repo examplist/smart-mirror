@@ -1,30 +1,54 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useAuthStore, FAILED, FETHCED } from '@/store/auth';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { logout } from '@/utils/auth/customer';
+import style from '@/styles/customer/page.module.scss';
 
 export default function customerHome() {
-  const [loggined, setLoggined] = useState<string>('로그인 중');
+  const { customer_status } = useAuthStore();
+  const router = useRouter();
 
-  useEffect(() => {
-    const customer_name = localStorage.getItem('customer_name');
-    const customer_birth = localStorage.getItem('customer_birth');
+  const click$buttonInfo = () => {
+    router.push('/customer/list');
+  };
 
-    fetch('/api/');
-  }, []);
+  const click$logout = () => {
+    logout();
+    location.reload();
+  };
 
-  if (loggined === '로그인 중') {
+  if (customer_status === FAILED) {
     return (
-      <main>
-        <div>로그인 중입니다.</div>
+      <main className={style['main']}>
+        <h1 className={style['greet']}>
+          안녕하세요? 스마트미러 고객 페이지입니다.
+        </h1>
+        <div className={style['links']}>
+          <Link href={'/customer/login'}>로그인하기</Link>
+        </div>
       </main>
     );
   }
 
-  if (loggined === '되었음') {
+  if (customer_status === FETHCED) {
     return (
-      <main>
-        <div></div>
+      <main className={style['main']}>
+        <h1 className={style['greet']}>
+          안녕하세요? 스마트미러 고객 페이지입니다.
+        </h1>
+        <div className={style['buttons']}>
+          <button className={style['button-info']} onClick={click$buttonInfo}>
+            내 정보 보기
+          </button>
+          <button className={style['button-logout']} onClick={click$logout}>
+            로그아웃하기
+          </button>
+        </div>
       </main>
     );
   }
+
+  return <div>로딩 중</div>;
 }

@@ -1,0 +1,9 @@
+@use '../../layout.scss';
+
+.main {
+  @include layout.only-message;
+}
+
+.logged-in {
+  font-size: 2rem;
+}

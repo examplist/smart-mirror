@@ -1,16 +1,13 @@
 import { RowDataPacket } from 'mysql2';
 import connection from './connection';
 
-export async function readOne(user_name: string, user_birth: string) {
-  const query = 'SELECT * FROM `users` WHERE name = ? AND birth = ?';
-
+export async function readOne(user: string) {
   try {
-    const [rows] = await connection.execute<RowDataPacket[]>(query, [
-      user_name,
-      user_birth,
-    ]);
+    const [rows] = await connection.execute<RowDataPacket[]>(
+      'SELECT * FROM `users` WHERE id = ?',
+      [user]
+    );
 
-    // return rows[0];
     return {
       succeeded: true,
       id: rows[0].id,

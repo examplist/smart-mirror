@@ -1,11 +1,10 @@
 import connection from './connection';
-import { Expression } from './results';
 
-export async function create(
+export async function add(
   exp_name: string,
   exp_obj: any,
   result_id: number,
-  user_id: number,
+  user: string,
   time: string
 ) {
   let query1;
@@ -28,7 +27,7 @@ export async function create(
       ');';
 
     try {
-      connection.execute(query, [exp_name, result_id, user_id, time]);
+      connection.execute(query, [exp_name, result_id, user, time]);
     } catch (error) {
       console.log('part create 에러');
       console.error(error);

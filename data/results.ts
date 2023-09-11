@@ -1,4 +1,4 @@
-import { RowDataPacket, ResultSetHeader } from 'mysql2';
+import { ResultSetHeader } from 'mysql2';
 import connection from './connection';
 import { faceInfoToDBString } from '@/utils/face';
 
@@ -27,9 +27,8 @@ interface Result {
   time: string;
 }
 
-export async function create(
-  user_name: string,
-  user_birth: string,
+export async function add(
+  user: string,
   smile: Expression,
   laugh: Expression,
   closeEye: Expression,
@@ -37,18 +36,17 @@ export async function create(
   time: string
 ) {
   const query =
-    'INSERT INTO `results` (user_name, user_birth, smile, laugh, closeEye, openEye, time)' +
-    'VALUES (?, ?, ?, ?, ?, ?, ?)';
+    'INSERT INTO `results` (time, smile, laugh, closeEye, openEye, user)' +
+    'VALUES (?, ?, ?, ?, ?, ?)';
 
   try {
     const response = await connection.query<ResultSetHeader>(query, [
-      user_name,
-      user_birth,
+      time,
       faceInfoToDBString(smile),
       faceInfoToDBString(laugh),
       faceInfoToDBString(closeEye),
       faceInfoToDBString(openEye),
-      time,
+      user,
     ]);
     // 갑자기 왜 배열로 받지?, promise여서 그런 것 같다.
     return { result: '성공', id: response[0].insertId };
@@ -58,20 +56,18 @@ export async function create(
   }
 }
 
-export async function reflectUserId(id: number, name: string, birth: string) {
-  const query1 = 'SET sql_safe_updates = 0;';
-  const query2 =
-    'UPDATE results SET user_id = ?, user_name = NULL, user_birth = NULL' +
-    ' ' +
-    'WHERE user_name = ? AND user_birth = ?';
+// export async function reflectUserId(id: number, name: string, birth: string) {
+//   const query1 = 'SET sql_safe_updates = 0;';
+//   const query2 =
+//     'UPDATE results SET user_id = ?, user_name = NULL, user_birth = NULL' +
+//     ' ' +
+//     'WHERE user_name = ? AND user_birth = ?';
 
-  try {
-    await connection.execute(query1);
-    await connection.execute(query2, [id, name, birth]);
-  } catch (error) {
-    console.log('reflectUserId 에러');
-    console.error(error);
-  }
-}
-
-// export async function getOne() {}
+//   try {
+//     await connection.execute(query1);
+//     await connection.execute(query2, [id, name, birth]);
+//   } catch (error) {
+//     console.log('reflectUserId 에러');
+//     console.error(error);
+//   }
+// }
