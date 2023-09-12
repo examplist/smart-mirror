@@ -1,0 +1,28 @@
+.title {
+  text-align: center;
+  background-color: gold;
+}
+
+.table {
+  width: 100%;
+
+  thead {
+    tr {
+      th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-weight: 800;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+      }
+    }
+  }
+}

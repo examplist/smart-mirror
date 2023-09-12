@@ -1,8 +1,8 @@
-import { fetchStatus, FETHCED, FAILED } from '@/store/auth';
+import { fetchStatus, FETCHED, FAILED } from '@/store/auth';
 
 export function sendStorageAuth(): { status: fetchStatus; id: string | null } {
   const status = localStorage.getItem('customer_status');
-  const id = localStorage.getItem('customer_name');
+  const id = localStorage.getItem('customer_id');
 
   if (!status) {
     localStorage.setItem('customer_status', FAILED);
@@ -10,7 +10,7 @@ export function sendStorageAuth(): { status: fetchStatus; id: string | null } {
   } else if (status === FAILED) {
     return { status: FAILED, id };
   } else {
-    return { status: FETHCED, id };
+    return { status: FETCHED, id };
   }
 }
 

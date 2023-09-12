@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuthStore, FAILED, FETHCED } from '@/store/auth';
+import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/utils/auth/customer';
@@ -32,7 +32,7 @@ export default function customerHome() {
     );
   }
 
-  if (customer_status === FETHCED) {
+  if (customer_status === FETCHED) {
     return (
       <main className={style['main']}>
         <h1 className={style['greet']}>

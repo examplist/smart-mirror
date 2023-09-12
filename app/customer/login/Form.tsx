@@ -2,10 +2,9 @@
 
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore, FETCHED } from '@/store/auth';
 import { login } from '@/utils/auth/customer';
 import style from '@/styles/customer/login/Form.module.scss';
-import { FETHCED } from '@/store/auth';
 
 export default function customerForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -40,7 +39,7 @@ export default function customerForm() {
         setLoading(false);
       } else {
         login(id);
-        setCustomer(FETHCED, id);
+        setCustomer(FETCHED, id);
         router.push('/customer');
       }
     } catch (error) {

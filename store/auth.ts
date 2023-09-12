@@ -1,5 +1,5 @@
 export const FAILED = 'failed';
-export const FETHCED = 'fetched';
+export const FETCHED = 'fetched';
 export type fetchStatus = 'fetched' | 'failed' | null;
 
 import { create } from 'zustand';
@@ -26,17 +26,11 @@ export const useAuthStore = create<AuthStore>((set) => ({
   admin_status: null,
   admin_id: null,
 
-  setCustomer: (
-    customer_status: 'fetched' | 'failed' | null,
-    customer_id: string | null
-  ) => {
+  setCustomer: (customer_status: fetchStatus, customer_id: string | null) => {
     set(() => ({ customer_status, customer_id }));
   },
 
-  setAdmin: (
-    admin_status: 'fetched' | 'failed' | null,
-    admin_id: string | null
-  ) => {
+  setAdmin: (admin_status: fetchStatus, admin_id: string | null) => {
     set(() => ({ admin_status, admin_id }));
   },
 }));

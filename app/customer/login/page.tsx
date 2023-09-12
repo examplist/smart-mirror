@@ -3,12 +3,12 @@
 import { useAuthStore } from '@/store/auth';
 import Form from './Form';
 import style from '@/styles/customer/login/page.module.scss';
-import { FAILED, FETHCED } from '@/store/auth';
+import { FAILED, FETCHED } from '@/store/auth';
 
 export default function customerLogin() {
   const { customer_status } = useAuthStore();
 
-  if (customer_status === FETHCED) {
+  if (customer_status === FETCHED) {
     return (
       <main className={style['main']}>
         <section className={style['logged-in']}>

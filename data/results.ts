@@ -1,6 +1,7 @@
-import { ResultSetHeader } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import connection from './connection';
 import { faceInfoToDBString } from '@/utils/face';
+import { timeToString } from '@/utils/time';
 
 interface Part {
   accMoveLeft: number;
@@ -28,6 +29,7 @@ interface Result {
 }
 
 export async function add(
+  uuid: string,
   user: string,
   smile: Expression,
   laugh: Expression,
@@ -36,11 +38,12 @@ export async function add(
   time: string
 ) {
   const query =
-    'INSERT INTO `results` (time, smile, laugh, closeEye, openEye, user)' +
-    'VALUES (?, ?, ?, ?, ?, ?)';
+    'INSERT INTO `results` (uuid, time, smile, laugh, closeEye, openEye, user) ' +
+    'VALUES (?, ?, ?, ?, ?, ?, ?)';
 
   try {
     const response = await connection.query<ResultSetHeader>(query, [
+      uuid,
       time,
       faceInfoToDBString(smile),
       faceInfoToDBString(laugh),
@@ -56,18 +59,42 @@ export async function add(
   }
 }
 
-// export async function reflectUserId(id: number, name: string, birth: string) {
-//   const query1 = 'SET sql_safe_updates = 0;';
-//   const query2 =
-//     'UPDATE results SET user_id = ?, user_name = NULL, user_birth = NULL' +
-//     ' ' +
-//     'WHERE user_name = ? AND user_birth = ?';
+export async function customerList(customer: string) {
+  try {
+    const query = 'SELECT * FROM `results` WHERE user = ?';
+    const [rows] = await connection.execute<RowDataPacket[]>(query, [customer]);
 
-//   try {
-//     await connection.execute(query1);
-//     await connection.execute(query2, [id, name, birth]);
-//   } catch (error) {
-//     console.log('reflectUserId 에러');
-//     console.error(error);
-//   }
-// }
+    // 시간 형식 바꾸기
+    for (const row of rows) {
+      row.time = timeToString(row.time);
+    }
+
+    return {
+      succeeded: true,
+      results: rows,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      succeeded: false,
+      results: null,
+    };
+  }
+}
+
+export async function customerItem(uuid: string) {
+  try {
+    const query = 'SELECT * FROM `results` WHERE uuid = ?';
+    const [rows] = await connection.execute<RowDataPacket[]>(query, [uuid]);
+    return {
+      succeeded: true,
+      result: rows[0],
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      succeeded: false,
+      result: null,
+    };
+  }
+}

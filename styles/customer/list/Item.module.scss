@@ -1,0 +1,24 @@
+.section {
+  display: flex;
+  width: 40rem;
+}
+
+.time {
+  background-color: cornsilk;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.link {
+  flex-grow: 1;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+
+  a {
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+}
