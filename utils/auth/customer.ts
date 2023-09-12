@@ -15,11 +15,11 @@ export function sendStorageAuth(): { status: fetchStatus; id: string | null } {
 }
 
 export function login(id: string) {
-  localStorage.setItem('customer_status', 'fetched');
+  localStorage.setItem('customer_status', FETCHED);
   localStorage.setItem('customer_id', id);
 }
 
 export function logout() {
-  localStorage.setItem('customer_status', 'failed');
+  localStorage.setItem('customer_status', FAILED);
   localStorage.removeItem('customer_id');
 }
