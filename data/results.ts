@@ -18,16 +18,6 @@ export interface Expression {
   mouse: Part;
 }
 
-interface Result {
-  user_name: string;
-  user_birth: string;
-  smile: Expression;
-  laugh: Expression;
-  closeEye: Expression;
-  openEye: Expression;
-  time: string;
-}
-
 export async function add(
   uuid: string,
   user: string,
@@ -95,6 +85,63 @@ export async function customerItem(uuid: string) {
     return {
       succeeded: false,
       result: null,
+    };
+  }
+}
+
+export async function adminList(
+  customerName: string,
+  customerBirth: string,
+  dateFront: string,
+  dateBack: string
+) {
+  const pre = 'SELECT * FROM `results`';
+  let isWHERE = '';
+  let queryCustomer = '';
+  let queryDateFront = '';
+  let queryDateBack = '';
+  let prevCondition = false;
+
+  if (customerName !== '' && customerBirth !== '') {
+    isWHERE = ' WHERE ';
+    queryCustomer = `user = '${customerName}_${customerBirth}'`;
+    prevCondition = true;
+  }
+
+  if (dateFront !== '') {
+    isWHERE = ' WHERE ';
+    queryDateFront = `time >= '${dateFront} 00:00:00'`;
+    if (prevCondition) {
+      queryDateFront = ' AND ' + queryDateFront;
+    }
+    prevCondition = true;
+  }
+
+  if (dateBack !== '') {
+    isWHERE = ' WHERE ';
+    queryDateBack = `time <= '${dateBack} 23:59:59'`;
+    if (prevCondition) {
+      queryDateBack = ' AND ' + queryDateBack;
+    }
+  }
+
+  const query = pre + isWHERE + queryCustomer + queryDateFront + queryDateBack;
+
+  try {
+    const [rows] = await connection.execute<RowDataPacket[]>(query);
+    for (const row of rows) {
+      row.time = timeToString(row.time);
+    }
+
+    return {
+      succeeded: true,
+      results: rows,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      succeeded: false,
+      results: null,
     };
   }
 }

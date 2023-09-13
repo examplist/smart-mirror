@@ -37,3 +37,13 @@ export async function add(
 
   return '성공';
 }
+
+export async function readMany(
+  part: string,
+  user: string,
+  time: string,
+  expression: string,
+  move: string,
+  minValue: string,
+  maxValue: string
+) {}
