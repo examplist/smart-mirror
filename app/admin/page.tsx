@@ -16,7 +16,7 @@ export default function adminHome() {
 
   const click$logout = () => {
     logout();
-    location.reload();
+    location.href = '/admin';
   };
 
   if (admin_status === FAILED) {

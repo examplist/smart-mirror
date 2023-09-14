@@ -16,7 +16,7 @@ export default function customerHome() {
 
   const click$logout = () => {
     logout();
-    location.reload();
+    location.href = '/customer';
   };
 
   if (customer_status === FAILED) {

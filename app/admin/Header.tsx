@@ -2,10 +2,15 @@
 
 import Link from 'next/link';
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
-import style from '@/styles/common/Header.module.scss';
+import { logout } from '@/utils/auth/admin';
+import style from '@/styles/admin/Header.module.scss';
 
 export default function Header() {
   const { admin_status } = useAuthStore();
+  const click$logout = () => {
+    logout();
+    location.href = '/admin';
+  };
 
   return (
     <header className={style['header']}>
@@ -13,7 +18,15 @@ export default function Header() {
         <Link href={'/'}>스마트미러</Link>
       </div>
       <div className={style['empty']}></div>
-      {admin_status === FAILED ? <div>로그인</div> : <div>로그아웃</div>}
+      {admin_status === FAILED ? (
+        <div className={style['login']}>
+          <Link href={'/admin/login'}>로그인</Link>
+        </div>
+      ) : (
+        <button className={style['logout']} onClick={click$logout}>
+          로그아웃
+        </button>
+      )}
     </header>
   );
 }
