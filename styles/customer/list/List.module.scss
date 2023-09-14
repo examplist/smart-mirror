@@ -1,0 +1,33 @@
+.lists {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50rem;
+}
+
+.items_list_name {
+  display: flex;
+  width: 100%;
+
+  .time {
+    width: 20rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .link {
+    font-size: 1.2rem;
+    flex-grow: 1;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.items_list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

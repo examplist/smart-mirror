@@ -7,6 +7,7 @@ interface TypeItem {
 
 import { useEffect, useState } from 'react';
 import Item from './Item';
+import style from '@/styles/customer/list/List.module.scss';
 
 export default function List({ customer }: { customer: string }) {
   const [loading, setLoading] = useState<boolean>(true);
@@ -50,11 +51,17 @@ export default function List({ customer }: { customer: string }) {
   }
 
   return (
-    <div>
-      {items.map((item) => {
-        const { time, uuid } = item;
-        return <Item time={time} uuid={uuid} key={uuid} />;
-      })}
+    <div className={style['lists']}>
+      <div className={style['items_list_name']}>
+        <div className={style['time']}>시간</div>
+        <div className={style['link']}>링크</div>
+      </div>
+      <div className={style['items_list']}>
+        {items.map((item) => {
+          const { time, uuid } = item;
+          return <Item time={time} uuid={uuid} key={uuid} />;
+        })}
+      </div>
     </div>
   );
 }

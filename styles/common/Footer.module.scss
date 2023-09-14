@@ -1,0 +1,15 @@
+@use '../layout.scss';
+
+.footer {
+  height: layout.$footer-height;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: wheat;
+
+  div {
+    margin: 0.5rem 0;
+    font-weight: 500;
+  }
+}

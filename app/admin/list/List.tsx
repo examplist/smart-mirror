@@ -156,8 +156,6 @@ export default function List() {
         <div className={style['items_list']}>
           {items.map((item) => {
             const { customer_name, customer_birth, time, uuid } = item;
-            console.log({ customer_name, customer_birth, time, uuid });
-
             return (
               <Item
                 key={uuid}
