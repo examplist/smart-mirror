@@ -1,4 +1,6 @@
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import connection from './connection';
+import { timeToString } from '@/utils/time';
 
 export async function add(
   exp_name: string,
@@ -38,12 +40,100 @@ export async function add(
   return '성공';
 }
 
-export async function readMany(
-  part: string,
-  user: string,
-  time: string,
+export async function adminList(
+  customerName: string,
+  customerBirth: string,
+  dateFront: string,
+  dateBack: string,
   expression: string,
+  part: string,
   move: string,
-  minValue: string,
-  maxValue: string
-) {}
+  valueMin: string,
+  valueMax: string
+) {
+  const pre = `SELECT DISTINCT
+    results.id AS id, uuid, smile, laugh, closeEye, openEye, results.user AS user, results.time AS time
+    FROM ${part} JOIN results ON ${part}.result = results.id
+    WHERE `;
+  let queryExpression = '';
+  let queryCustomer = '';
+  let queryDateFront = '';
+  let queryDateBack = '';
+  let queryValueMin = '';
+  let queryValueMax = '';
+  let prevCondition = false;
+
+  if (expression !== '') {
+    queryExpression = `expression = '${expression}'`;
+    prevCondition = true;
+  }
+
+  if (customerName !== '' && customerBirth !== '') {
+    queryCustomer = `results.user = '${customerName}_${customerBirth}'`;
+    if (prevCondition) {
+      queryCustomer = ' AND ' + queryCustomer;
+    }
+    prevCondition = true;
+  }
+
+  if (dateFront !== '') {
+    queryDateFront = `time >= '${dateFront} 00:00:00'`;
+    if (prevCondition) {
+      queryDateFront = ' AND ' + queryDateFront;
+    }
+    prevCondition = true;
+  }
+
+  if (dateBack !== '') {
+    queryDateBack = `time <= '${dateBack} 23:59:59'`;
+    if (prevCondition) {
+      queryDateBack = ' AND ' + queryDateBack;
+    }
+    prevCondition = true;
+  }
+
+  if (valueMin !== '') {
+    queryValueMin = `${move} >= ${valueMin}`;
+    if (prevCondition) {
+      queryValueMin = ' AND ' + queryValueMin;
+    }
+    prevCondition = true;
+  }
+
+  if (valueMax !== '') {
+    queryValueMax = `${move} <= ${valueMax}`;
+    if (prevCondition) {
+      queryValueMax = ' AND ' + queryValueMax;
+    }
+    prevCondition = true;
+  }
+
+  const query =
+    pre +
+    queryExpression +
+    queryCustomer +
+    queryDateFront +
+    queryDateBack +
+    queryValueMin +
+    queryValueMax;
+
+  console.log({ query });
+
+  try {
+    const [rows] = await connection.execute<RowDataPacket[]>(query);
+    for (const row of rows) {
+      row.time = timeToString(row.time);
+    }
+
+    return {
+      succeeded: true,
+      results: rows,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      succeeded: false,
+      results: null,
+    };
+  }
+}

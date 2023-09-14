@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import * as ManipulateResults from '@/data/results';
+import * as ManipulateParts from '@/data/parts';
 
 export async function POST(req: Request) {
   const {
@@ -32,6 +33,19 @@ export async function POST(req: Request) {
       customerBirth,
       dateFront,
       dateBack
+    );
+    return NextResponse.json({ succeeded, results });
+  } else {
+    const { succeeded, results } = await ManipulateParts.adminList(
+      customerName,
+      customerBirth,
+      dateFront,
+      dateBack,
+      expression,
+      part,
+      move,
+      valueMin,
+      valueMax
     );
     return NextResponse.json({ succeeded, results });
   }
