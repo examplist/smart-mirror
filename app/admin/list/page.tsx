@@ -7,13 +7,13 @@ import List from './List';
 import style from '@/styles/admin/list/page.module.scss';
 
 export default function adminList() {
-  const { customer_status, customer_id } = useAuthStore();
+  const { admin_status, admin_id } = useAuthStore();
 
-  if (customer_status === FAILED || customer_id === null) {
+  if (admin_status === FAILED || admin_id === null) {
     return <main>로그인을 하셔야 합니다.</main>;
   }
 
-  if (customer_status === FETCHED) {
+  if (admin_status === FETCHED) {
     return <List />;
   }
 

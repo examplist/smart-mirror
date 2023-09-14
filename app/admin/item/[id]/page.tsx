@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import Expression from './Expression';
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
 
-export default function customerItem({ params }: { params: { id: string } }) {
-  const { customer_status } = useAuthStore();
+export default function adminItem({ params }: { params: { id: string } }) {
+  const { admin_status } = useAuthStore();
 
   const { id } = params;
   const [smile, setSmile] = useState<any>();
@@ -36,11 +36,11 @@ export default function customerItem({ params }: { params: { id: string } }) {
     })();
   }, [smile, laugh, openEye, closeEye]);
 
-  if (customer_status === FAILED) {
+  if (admin_status === FAILED) {
     return <main>로그인을 하셔야 합니다.</main>;
   }
 
-  if (customer_status === FETCHED) {
+  if (admin_status === FETCHED) {
     return (
       <div>
         <Expression bundle={smile} type={'smile'} />
