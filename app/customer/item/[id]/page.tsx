@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Expression from './Expression';
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
+import style from '@/styles/customer/item/page.module.scss';
 
 export default function customerItem({ params }: { params: { id: string } }) {
   const { customer_status } = useAuthStore();
@@ -37,19 +38,31 @@ export default function customerItem({ params }: { params: { id: string } }) {
   }, [smile, laugh, openEye, closeEye]);
 
   if (customer_status === FAILED) {
-    return <main>로그인을 하셔야 합니다.</main>;
+    return (
+      <main className={style['main']}>
+        <section className={style['only-message']}>
+          로그인을 하셔야 합니다.
+        </section>
+      </main>
+    );
   }
 
   if (customer_status === FETCHED) {
     return (
-      <div>
+      <main className={style['content']}>
         <Expression bundle={smile} type={'smile'} />
         <Expression bundle={laugh} type={'laugh'} />
         <Expression bundle={openEye} type={'openEye'} />
         <Expression bundle={closeEye} type={'closeEye'} />
-      </div>
+      </main>
     );
   }
 
-  return <main>로딩 중</main>;
+  return (
+    <main className={style['main']}>
+      <section className={style['only-message']}>
+        로그인을 하셔야 합니다.
+      </section>
+    </main>
+  );
 }

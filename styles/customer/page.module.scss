@@ -37,3 +37,25 @@
   color: black;
   background-color: coral;
 }
+
+.links {
+  a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    background-color: chartreuse;
+    padding: 1rem;
+  }
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 3rem;
+  font-weight: 700;
+}

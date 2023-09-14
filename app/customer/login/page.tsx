@@ -11,7 +11,7 @@ export default function customerLogin() {
   if (customer_status === FETCHED) {
     return (
       <main className={style['main']}>
-        <section className={style['logged-in']}>
+        <section className={style['only-message']}>
           이미 로그인을 하셨습니다.
         </section>
       </main>
@@ -26,5 +26,9 @@ export default function customerLogin() {
     );
   }
 
-  return <main className={style['main']}>로딩 중</main>;
+  return (
+    <main className={style['main']}>
+      <section className={style['only-message']}>로딩 중</section>
+    </main>
+  );
 }

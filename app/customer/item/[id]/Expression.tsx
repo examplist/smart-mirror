@@ -1,7 +1,6 @@
 'use client';
 
 import { expressionToKor } from '@/utils/lang';
-import { useState, useEffect } from 'react';
 import Part from './Part';
 import style from '@/styles/customer/item/Expression.module.scss';
 

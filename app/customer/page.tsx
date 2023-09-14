@@ -50,5 +50,9 @@ export default function customerHome() {
     );
   }
 
-  return <div>로딩 중</div>;
+  return (
+    <main className={style['main']}>
+      <section className={style['loading']}>로딩 중</section>
+    </main>
+  );
 }
