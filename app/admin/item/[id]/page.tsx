@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import Expression from './Expression';
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
+import style from '@/styles/admin/item/page.module.scss';
 
 export default function adminItem({ params }: { params: { id: string } }) {
-  const { admin_status } = useAuthStore();
+  const { admin_status, admin_id } = useAuthStore();
 
   const { id } = params;
   const [smile, setSmile] = useState<any>();
@@ -37,7 +38,21 @@ export default function adminItem({ params }: { params: { id: string } }) {
   }, [smile, laugh, openEye, closeEye]);
 
   if (admin_status === FAILED) {
-    return <main>로그인을 하셔야 합니다.</main>;
+    return (
+      <main className={style['main']}>
+        <section className={style['only-message']}>
+          로그인을 하셔야 합니다.
+        </section>
+      </main>
+    );
+  }
+
+  if (admin_id === null) {
+    return (
+      <main className={style['main']}>
+        <section className={style['only-message']}>로딩 중</section>
+      </main>
+    );
   }
 
   if (admin_status === FETCHED) {
@@ -50,6 +65,4 @@ export default function adminItem({ params }: { params: { id: string } }) {
       </div>
     );
   }
-
-  return <main>로딩 중</main>;
 }
