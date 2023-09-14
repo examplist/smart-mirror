@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import style from '@/styles/customer/list/Item.module.scss';
+import style from '@/styles/admin/list/Item.module.scss';
 
 export default function Item({
   customer_name,
@@ -18,8 +18,8 @@ export default function Item({
 
   return (
     <section className={style['section']}>
-      <div>{customer_name}</div>
-      <div>{customer_birth}</div>
+      <div className={style['customer_name']}>{customer_name}</div>
+      <div className={style['customer_birth']}>{customer_birth}</div>
       <div className={style['time']}>{time}</div>
       <div className={style['link']}>
         <Link href={`/admin/item/${uuid}`}>해당 페이지로 이동</Link>

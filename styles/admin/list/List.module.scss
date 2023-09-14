@@ -2,11 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  // height: 100vh;
+  padding-top: 5rem;
 }
 
 .form {
   width: 50rem;
+  margin-bottom: 5rem;
 }
 
 .customer {
@@ -115,4 +117,52 @@
   p {
     margin-bottom: 0.2rem;
   }
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.items_list_name {
+  display: flex;
+  width: 50rem;
+
+  .name {
+    width: 6rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .birth {
+    width: 10rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .time {
+    width: 20rem;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .link {
+    flex-grow: 1;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.items_list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

@@ -146,21 +146,29 @@ export default function List() {
           </div>
         </form>
       </main>
-      <div>
-        {items.map((item) => {
-          const { customer_name, customer_birth, time, uuid } = item;
-          console.log({ customer_name, customer_birth, time, uuid });
+      <div className={style['lists']}>
+        <div className={style['items_list_name']}>
+          <div className={style['name']}>이름</div>
+          <div className={style['birth']}>생년월일</div>
+          <div className={style['time']}>시간</div>
+          <div className={style['link']}>링크</div>
+        </div>
+        <div className={style['items_list']}>
+          {items.map((item) => {
+            const { customer_name, customer_birth, time, uuid } = item;
+            console.log({ customer_name, customer_birth, time, uuid });
 
-          return (
-            <Item
-              key={uuid}
-              customer_name={customer_name}
-              customer_birth={customer_birth}
-              time={time}
-              uuid={uuid}
-            />
-          );
-        })}
+            return (
+              <Item
+                key={uuid}
+                customer_name={customer_name}
+                customer_birth={customer_birth}
+                time={time}
+                uuid={uuid}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
