@@ -1,21 +1,20 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import ReactPaginate from 'react-paginate';
-import style from '@/styles/category/Paginate.module.scss';
+import style from '@/styles/admin/list/Paginate.module.scss';
 
 interface Props {
-  category: string;
   pageCount: number;
   currentPage: number;
+  getLists: Function;
 }
 type Click$PageButton = (selectedItem: { selected: number }) => void;
 
-export default function Paginate({ category, pageCount, currentPage }: Props) {
-  const router = useRouter();
+export default function Paginate({ pageCount, currentPage, getLists }: Props) {
+  console.log(111111111111);
 
-  const handlePageClick: Click$PageButton = (event) => {
-    // router.push(`/category/${category}/${event.selected + 1}`);
+  const handlePageClick: Click$PageButton = async (event) => {
+    await getLists(event.selected + 1);
   };
 
   return (
@@ -37,7 +36,7 @@ export default function Paginate({ category, pageCount, currentPage }: Props) {
         breakLabel="..."
         breakClassName={style['page-item']}
         breakLinkClassName={style['page-link']}
-        containerClassName={style['pagination']}
+        containerClassName={`${style['pagination']} paginate-container`}
         activeClassName={style['active']}
         renderOnZeroPageCount={undefined}
       />

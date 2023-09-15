@@ -49,7 +49,8 @@ export async function adminList(
   part: string,
   move: string,
   valueMin: string,
-  valueMax: string
+  valueMax: string,
+  page: number
 ) {
   const pre = `SELECT DISTINCT
     results.id AS id, uuid, smile, laugh, closeEye, openEye, results.customer AS customer, results.time AS time
@@ -61,6 +62,7 @@ export async function adminList(
   let queryDateBack = '';
   let queryValueMin = '';
   let queryValueMax = '';
+  let queryPage = ` ORDER BY time DESC LIMIT ${(page - 1) * 4} , 4`;
   let prevCondition = false;
 
   if (expression !== '') {
@@ -115,11 +117,20 @@ export async function adminList(
     queryDateFront +
     queryDateBack +
     queryValueMin +
+    queryValueMax +
+    queryPage;
+
+  const queryCount =
+    `SELECT COUNT(*) AS count FROM ${part} WHERE ` +
+    queryExpression +
+    queryCustomer +
+    queryDateFront +
+    queryDateBack +
+    queryValueMin +
     queryValueMax;
 
-  console.log({ query });
-
   try {
+    const [rowsCount] = await connection.execute<RowDataPacket[]>(queryCount);
     const [rows] = await connection.execute<RowDataPacket[]>(query);
     for (const row of rows) {
       row.time = timeToString(row.time);
@@ -128,6 +139,7 @@ export async function adminList(
     return {
       succeeded: true,
       results: rows,
+      count: rowsCount[0].count,
     };
   } catch (error) {
     console.error(error);

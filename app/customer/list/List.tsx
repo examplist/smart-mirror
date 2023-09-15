@@ -10,13 +10,10 @@ import Item from './Item';
 import style from '@/styles/customer/list/List.module.scss';
 
 export default function List({ customer }: { customer: string }) {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [fetchSucceeded, setFetchSucceeded] = useState<boolean>(true);
   const [items, setItems] = useState<TypeItem[]>([]);
 
   useEffect(() => {
     (async () => {
-      //////////////////////////////
       const response = await fetch('/api/customer/list', {
         method: 'POST',
         headers: {
@@ -30,25 +27,12 @@ export default function List({ customer }: { customer: string }) {
       const { succeeded, results } = await response.json();
 
       if (!succeeded) {
-        setFetchSucceeded(false);
-        setLoading(false);
       } else {
         console.log(results);
         setItems(results);
-        setLoading(false);
       }
-
-      //////////////////////////////
     })();
   }, []);
-
-  if (loading) {
-    return <div>로딩 중</div>;
-  }
-
-  if (!fetchSucceeded) {
-    return <div>죄송합니다. 자료를 가져오는 데 문제가 발생했습니다.</div>;
-  }
 
   return (
     <div className={style['lists']}>

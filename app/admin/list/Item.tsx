@@ -22,7 +22,7 @@ export default function Item({
       <div className={style['customer_birth']}>{customer_birth}</div>
       <div className={style['time']}>{time}</div>
       <div className={style['link']}>
-        <Link href={`/admin/item/${uuid}`}>해당 페이지로 이동</Link>
+        <Link href={`/admin/item/${uuid}`}>이동</Link>
       </div>
     </section>
   );

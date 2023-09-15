@@ -13,30 +13,20 @@ export async function POST(req: Request) {
     move,
     valueMin,
     valueMax,
+    page,
   } = await req.json();
 
-  console.log({
-    customerName,
-    customerBirth,
-    dateFront,
-    dateBack,
-    expression,
-    part,
-    move,
-    valueMin,
-    valueMax,
-  });
-
   if (expression === '' || part === '' || move === '') {
-    const { succeeded, results } = await ManipulateResults.adminList(
+    const { succeeded, results, count } = await ManipulateResults.adminList(
       customerName,
       customerBirth,
       dateFront,
-      dateBack
+      dateBack,
+      page
     );
-    return NextResponse.json({ succeeded, results });
+    return NextResponse.json({ succeeded, results, count });
   } else {
-    const { succeeded, results } = await ManipulateParts.adminList(
+    const { succeeded, results, count } = await ManipulateParts.adminList(
       customerName,
       customerBirth,
       dateFront,
@@ -45,8 +35,9 @@ export async function POST(req: Request) {
       part,
       move,
       valueMin,
-      valueMax
+      valueMax,
+      page
     );
-    return NextResponse.json({ succeeded, results });
+    return NextResponse.json({ succeeded, results, count });
   }
 }

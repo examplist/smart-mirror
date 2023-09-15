@@ -92,14 +92,17 @@ export async function adminList(
   customerName: string,
   customerBirth: string,
   dateFront: string,
-  dateBack: string
+  dateBack: string,
+  page: number
 ) {
-  const pre = 'SELECT * FROM `results`';
+  const pre =
+    'SELECT id, uuid, time, smile, laugh, closeEye, openEye, customer FROM `results`';
   let isWHERE = '';
   let queryCustomer = '';
   let queryDateFront = '';
   let queryDateBack = '';
   let prevCondition = false;
+  let queryPage = ` ORDER BY time DESC LIMIT ${(page - 1) * 4} , 4`;
 
   if (customerName !== '' && customerBirth !== '') {
     isWHERE = ' WHERE ';
@@ -124,9 +127,19 @@ export async function adminList(
     }
   }
 
-  const query = pre + isWHERE + queryCustomer + queryDateFront + queryDateBack;
+  const query =
+    pre + isWHERE + queryCustomer + queryDateFront + queryDateBack + queryPage;
+
+  const queryCount =
+    'SELECT COUNT(*) AS count FROM `results` ' +
+    isWHERE +
+    queryCustomer +
+    queryDateFront +
+    queryDateBack;
 
   try {
+    const [rowsCount] = await connection.execute<RowDataPacket[]>(queryCount);
+
     const [rows] = await connection.execute<RowDataPacket[]>(query);
     for (const row of rows) {
       row.time = timeToString(row.time);
@@ -135,6 +148,7 @@ export async function adminList(
     return {
       succeeded: true,
       results: rows,
+      count: rowsCount[0].count,
     };
   } catch (error) {
     console.error(error);

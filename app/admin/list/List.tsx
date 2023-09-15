@@ -9,12 +9,14 @@ interface AdminItem {
 
 import { useEffect, useState, useRef, FormEvent } from 'react';
 import Item from './Item';
+import Paginate from './Paginate';
 import style from '@/styles/admin/list/List.module.scss';
 
 export default function List() {
   const [loading, setLoading] = useState<boolean>(true);
   const [fetchSucceeded, setFetchSucceeded] = useState<boolean>(true);
   const [items, setItems] = useState<AdminItem[]>([]);
+  const [pageCount, setPageCount] = useState<number>(1);
 
   const refCustomerName = useRef<HTMLInputElement>(null);
   const refCustomerBirth = useRef<HTMLInputElement>(null);
@@ -26,9 +28,7 @@ export default function List() {
   const refValueMin = useRef<HTMLInputElement>(null);
   const refValueMax = useRef<HTMLInputElement>(null);
 
-  const submit$form = async (e: FormEvent) => {
-    e.preventDefault();
-
+  async function getLists(page: number) {
     const inputCustomerName = refCustomerName.current?.value;
     const inputCustomerBirth = refCustomerBirth.current?.value;
     const inputDateFront = refDateFront.current?.value;
@@ -54,10 +54,11 @@ export default function List() {
         move: inputMove,
         valueMin: inputValueMin,
         valueMax: inputValueMax,
+        page,
       }),
     });
 
-    const { succeeded, results } = await response.json();
+    const { succeeded, results, count } = await response.json();
 
     if (!succeeded) {
       alert('문제 발생');
@@ -72,8 +73,14 @@ export default function List() {
         };
       });
       setItems(resultsCustomerSplitted);
+      setPageCount(Math.ceil(count / 4));
       console.log(resultsCustomerSplitted);
     }
+  }
+
+  const submit$form = async (e: FormEvent) => {
+    e.preventDefault();
+    getLists(1);
   };
 
   return (
@@ -103,16 +110,16 @@ export default function List() {
           </select>
           <select name="part" ref={refPart}>
             <option value="">선택 안 함</option>
-            <option value="cheek">뺨</option>
-            <option value="eye">눈</option>
             <option value="eyebrow">눈썹</option>
+            <option value="eye">눈</option>
+            <option value="cheek">뺨</option>
             <option value="mouse">입</option>
           </select>
           <select name="move" ref={refMove}>
             <option value="">선택 안 함</option>
             <option value="accMoveLeft">좌_누적이동량</option>
-            <option value="accMoveRight">우_누적이동량</option>
             <option value="maxMeasureLeft">좌_최대실측치</option>
+            <option value="accMoveRight">우_누적이동량</option>
             <option value="maxMeasureRight">우_최대실측치</option>
             <option value="symmetry">좌우대칭성점수</option>
           </select>
@@ -164,6 +171,7 @@ export default function List() {
           })}
         </div>
       </section>
+      <Paginate pageCount={pageCount} getLists={getLists} currentPage={1} />
     </main>
   );
 }
