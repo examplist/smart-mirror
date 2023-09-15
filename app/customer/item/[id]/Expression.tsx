@@ -20,9 +20,9 @@ export default function Expression({
   return (
     <div className={style['container']}>
       <h1 className={style['title']}>{expressionToKor(type)}</h1>
-      <Part type={'뺨'} contents={contents[0]} />
+      <Part type={'눈썹'} contents={contents[0]} />
       <Part type={'눈'} contents={contents[1]} />
-      <Part type={'눈썹'} contents={contents[2]} />
+      <Part type={'뺨'} contents={contents[2]} />
       <Part type={'입'} contents={contents[3]} />
     </div>
   );

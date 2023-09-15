@@ -60,8 +60,8 @@ export default function adminItem({ params }: { params: { id: string } }) {
       <div>
         <Expression bundle={smile} type={'smile'} />
         <Expression bundle={laugh} type={'laugh'} />
-        <Expression bundle={openEye} type={'openEye'} />
         <Expression bundle={closeEye} type={'closeEye'} />
+        <Expression bundle={openEye} type={'openEye'} />
       </div>
     );
   }

@@ -1,14 +1,19 @@
+@use '../../layout.scss';
+
 .main {
+  width: 100%;
+  min-height: calc(100vh - layout.$header-height - layout.$footer-height);
   display: flex;
   justify-content: center;
   align-items: center;
-  // height: 100vh;
-  padding-top: 5rem;
+  flex-direction: column;
 }
 
 .form {
   width: 50rem;
   margin-bottom: 5rem;
+  border: 3px solid black;
+  padding: 2rem;
 }
 
 .customer {
@@ -25,6 +30,8 @@
 
   input {
     flex-grow: 1;
+    border-radius: 0;
+    border: 1px solid black;
   }
 
   input:first-of-type {
@@ -54,6 +61,8 @@
 
   input {
     flex-grow: 1;
+    border-radius: 0;
+    border: 1px solid black;
   }
 
   .tilde {
@@ -78,10 +87,14 @@
 
   select {
     margin-right: 0.5rem;
+    border-radius: 0;
+    border: 1px solid black;
   }
 
   input[type='text'] {
     flex-grow: 1;
+    border-radius: 0;
+    border: 1px solid black;
   }
   .tilde {
     display: flex;

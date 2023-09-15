@@ -20,15 +20,14 @@ export interface Expression {
 
 export async function add(
   uuid: string,
-  user: string,
-  smile: Expression,
-  laugh: Expression,
-  closeEye: Expression,
-  openEye: Expression,
+  customer: string,
+  obj: Record<string, Expression>,
   time: string
 ) {
+  const { smile, laugh, closeEye, openEye } = obj;
+
   const query =
-    'INSERT INTO `results` (uuid, time, smile, laugh, closeEye, openEye, user) ' +
+    'INSERT INTO `results` (uuid, time, smile, laugh, closeEye, openEye, customer) ' +
     'VALUES (?, ?, ?, ?, ?, ?, ?)';
 
   try {
@@ -39,7 +38,7 @@ export async function add(
       faceInfoToDBString(laugh),
       faceInfoToDBString(closeEye),
       faceInfoToDBString(openEye),
-      user,
+      customer,
     ]);
     // 갑자기 왜 배열로 받지?, promise여서 그런 것 같다.
     return { result: '성공', id: response[0].insertId };
@@ -51,7 +50,7 @@ export async function add(
 
 export async function customerList(customer: string) {
   try {
-    const query = 'SELECT * FROM `results` WHERE user = ?';
+    const query = 'SELECT * FROM `results` WHERE customer = ?';
     const [rows] = await connection.execute<RowDataPacket[]>(query, [customer]);
 
     // 시간 형식 바꾸기
@@ -104,7 +103,7 @@ export async function adminList(
 
   if (customerName !== '' && customerBirth !== '') {
     isWHERE = ' WHERE ';
-    queryCustomer = `user = '${customerName}_${customerBirth}'`;
+    queryCustomer = `customer = '${customerName}_${customerBirth}'`;
     prevCondition = true;
   }
 

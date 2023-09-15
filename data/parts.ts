@@ -1,4 +1,4 @@
-import { ResultSetHeader, RowDataPacket } from 'mysql2';
+import { RowDataPacket } from 'mysql2';
 import connection from './connection';
 import { timeToString } from '@/utils/time';
 
@@ -6,7 +6,7 @@ export async function add(
   exp_name: string,
   exp_obj: any,
   result_id: number,
-  user: string,
+  customer: string,
   time: string
 ) {
   let query1;
@@ -16,7 +16,7 @@ export async function add(
     let queryPartFront = '';
     let queryPartBack = '';
     for (const move in exp_obj[part]) {
-      query1 = `INSERT INTO ${part} (expression, result, user, time, `;
+      query1 = `INSERT INTO ${part} (expression, result, customer, time, `;
       query2 = `) VALUES (?, ?, ?, ?, `;
       queryPartFront += move + ', ';
       queryPartBack += exp_obj[part][move].toString() + ', ';
@@ -29,7 +29,7 @@ export async function add(
       ');';
 
     try {
-      connection.execute(query, [exp_name, result_id, user, time]);
+      connection.execute(query, [exp_name, result_id, customer, time]);
     } catch (error) {
       console.log('part create 에러');
       console.error(error);
@@ -52,7 +52,7 @@ export async function adminList(
   valueMax: string
 ) {
   const pre = `SELECT DISTINCT
-    results.id AS id, uuid, smile, laugh, closeEye, openEye, results.user AS user, results.time AS time
+    results.id AS id, uuid, smile, laugh, closeEye, openEye, results.customer AS customer, results.time AS time
     FROM ${part} JOIN results ON ${part}.result = results.id
     WHERE `;
   let queryExpression = '';
@@ -69,7 +69,7 @@ export async function adminList(
   }
 
   if (customerName !== '' && customerBirth !== '') {
-    queryCustomer = `results.user = '${customerName}_${customerBirth}'`;
+    queryCustomer = `results.customer = '${customerName}_${customerBirth}'`;
     if (prevCondition) {
       queryCustomer = ' AND ' + queryCustomer;
     }

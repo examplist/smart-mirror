@@ -16,8 +16,8 @@ export default function Part({
         <thead>
           <tr>
             <th>좌_누적이동량</th>
-            <th>우_누적이동량</th>
             <th>좌_최대실측치</th>
+            <th>우_누적이동량</th>
             <th>우_최대실측치</th>
             <th>좌우대칭성점수</th>
           </tr>

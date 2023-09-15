@@ -52,8 +52,8 @@ export default function customerItem({ params }: { params: { id: string } }) {
       <main className={style['content']}>
         <Expression bundle={smile} type={'smile'} />
         <Expression bundle={laugh} type={'laugh'} />
-        <Expression bundle={openEye} type={'openEye'} />
         <Expression bundle={closeEye} type={'closeEye'} />
+        <Expression bundle={openEye} type={'openEye'} />
       </main>
     );
   }

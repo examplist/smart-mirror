@@ -1,11 +1,11 @@
 import { RowDataPacket } from 'mysql2';
 import connection from './connection';
 
-export async function readOne(user: string) {
+export async function readOne(customer: string) {
   try {
     const [rows] = await connection.execute<RowDataPacket[]>(
-      'SELECT * FROM `users` WHERE id = ?',
-      [user]
+      'SELECT * FROM `customers` WHERE id = ?',
+      [customer]
     );
 
     return {
@@ -20,7 +20,3 @@ export async function readOne(user: string) {
     };
   }
 }
-
-// const query = 'SELECT * FROM `users` WHERE name = ? AND birth = ?';
-// const [rows] = await connection.execute(query, ['name1', '2000-01-01']);
-// console.log({ rows });
