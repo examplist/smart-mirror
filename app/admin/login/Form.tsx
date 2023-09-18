@@ -22,8 +22,6 @@ export default function customerForm() {
     }
     setLoading(true);
     try {
-      console.log({ inputId, inputPassword });
-
       const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: {

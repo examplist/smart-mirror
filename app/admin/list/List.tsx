@@ -74,7 +74,6 @@ export default function List() {
       });
       setItems(resultsCustomerSplitted);
       setPageCount(Math.ceil(count / 4));
-      console.log(resultsCustomerSplitted);
     }
   }
 

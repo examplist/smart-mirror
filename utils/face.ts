@@ -24,20 +24,20 @@ export function faceInfoToDBString(obj: Expression) {
   return JSON.stringify(arr);
 }
 
-// export function faceInfoDBStringToObject(arr: any) {
-//   const obj = {
-//     accMoveLeft: undefined,
-//     accMoveRight: undefined,
-//     maxMeasureLeft: undefined,
-//     maxMeasureRight: undefined,
-//     symmetry: undefined,
-//   };
+export function getExpDataFromString(str: string, expression: string) {
+  // [[1,3,5,7,9],[9,7,5,3,1],[2,4,6,8,10],[10,8,6,4,2]]
+  const parsed = JSON.parse(str);
 
-//   obj.accMoveLeft = arr[0];
-//   obj.accMoveRight = arr[1];
-//   acc.maxMeasureLeft = arr[2];
-//   acc.maxMeasureRight = arr[3];
-//   obj.symmetry = arr[4];
-
-//   return obj;
-// }
+  switch (expression) {
+    case 'eyebrow':
+      return parsed[0];
+    case 'eye':
+      return parsed[1];
+    case 'cheek':
+      return parsed[2];
+    case 'mouse':
+      return parsed[3];
+    default:
+      return;
+  }
+}

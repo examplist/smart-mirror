@@ -11,8 +11,6 @@ interface Props {
 type Click$PageButton = (selectedItem: { selected: number }) => void;
 
 export default function Paginate({ pageCount, currentPage, getLists }: Props) {
-  console.log(111111111111);
-
   const handlePageClick: Click$PageButton = async (event) => {
     await getLists(event.selected + 1);
   };

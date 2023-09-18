@@ -14,8 +14,6 @@ export default function Item({
   time: string;
   uuid: string;
 }) {
-  console.log({ customer_name, customer_birth });
-
   return (
     <section className={style['section']}>
       <div className={style['customer_name']}>{customer_name}</div>

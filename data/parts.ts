@@ -31,7 +31,6 @@ export async function add(
     try {
       connection.execute(query, [exp_name, result_id, customer, time]);
     } catch (error) {
-      console.log('part create 에러');
       console.error(error);
       return '실패';
     }

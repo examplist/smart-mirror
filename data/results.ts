@@ -158,3 +158,50 @@ export async function adminList(
     };
   }
 }
+
+export async function adminChart(
+  customerName: string,
+  customerBirth: string,
+  expression: string
+) {
+  const customer = customerName + '_' + customerBirth;
+  const query = `SELECT ${expression}, time FROM results WHERE customer='${customer}' ORDER BY time DESC LIMIT 10;`;
+
+  try {
+    const [rows] = await connection.execute<RowDataPacket[]>(query);
+    for (const row of rows) {
+      row.time = timeToString(row.time);
+    }
+    return {
+      succeeded: true,
+      results: rows,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      succeeded: false,
+      results: null,
+    };
+  }
+}
+
+export async function customerChart(customer: string, expression: string) {
+  const query = `SELECT ${expression}, time FROM results WHERE customer='${customer}' ORDER BY time DESC LIMIT 10;`;
+
+  try {
+    const [rows] = await connection.execute<RowDataPacket[]>(query);
+    for (const row of rows) {
+      row.time = timeToString(row.time);
+    }
+    return {
+      succeeded: true,
+      results: rows,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      succeeded: false,
+      results: null,
+    };
+  }
+}

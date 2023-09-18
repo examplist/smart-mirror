@@ -28,7 +28,6 @@ export default function List({ customer }: { customer: string }) {
 
       if (!succeeded) {
       } else {
-        console.log(results);
         setItems(results);
       }
     })();
