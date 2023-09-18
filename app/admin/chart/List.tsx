@@ -63,6 +63,10 @@ export default function List() {
 
     if (!succeeded) {
       alert('문제 발생');
+      return;
+    } else if (results.length === 0) {
+      alert('해당 환자가 존재하지 않습니다.');
+      return;
     } else {
       results.forEach((result: any) => {
         const congregated = getExpDataFromString(

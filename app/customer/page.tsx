@@ -10,8 +10,12 @@ export default function customerHome() {
   const { customer_status } = useAuthStore();
   const router = useRouter();
 
-  const click$buttonInfo = () => {
+  const click$buttonInfoTable = () => {
     router.push('/customer/list');
+  };
+
+  const click$buttonInfoGraph = () => {
+    router.push('/customer/chart');
   };
 
   const click$logout = () => {
@@ -39,11 +43,20 @@ export default function customerHome() {
           안녕하세요? 스마트미러 고객 페이지입니다.
         </h1>
         <div className={style['buttons']}>
-          <button className={style['button-info']} onClick={click$buttonInfo}>
-            내 정보 보기
+          <button
+            className={style['button-info-table']}
+            onClick={click$buttonInfoTable}
+          >
+            내 정보 (표)
+          </button>
+          <button
+            className={style['button-info-graph']}
+            onClick={click$buttonInfoGraph}
+          >
+            내 정보 (그래프)
           </button>
           <button className={style['button-logout']} onClick={click$logout}>
-            로그아웃하기
+            로그아웃
           </button>
         </div>
       </main>
