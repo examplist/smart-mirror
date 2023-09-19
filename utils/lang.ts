@@ -1,5 +1,5 @@
 export function expressionToKor(str: string) {
-  const obj = {
+  const obj: any = {
     smile: '미소짓기',
     laugh: '크게웃기',
     closeEye: '눈감기',
@@ -10,7 +10,7 @@ export function expressionToKor(str: string) {
 }
 
 export function moveToKor(str: string) {
-  const obj = {
+  const obj: any = {
     accMoveLeft: '좌_누적이동량',
     maxMeasureLeft: '좌_최대실측치',
     accMoveRight: '우_누적이동량',

@@ -143,6 +143,9 @@ export default function List() {
             부분에서 수치는 입력한 수치를 포함합니다. 예를 들어 시작하는 숫자를
             1로 했다면 1도 포함됩니다.
           </p>
+          <p style={{ color: 'red' }}>
+            새롭게 검색을 하시는 경우, 새로고침을 하고 하시기 바랍니다.
+          </p>
         </div>
         <div className={style['submit']}>
           <input type="submit" value="검색" />
