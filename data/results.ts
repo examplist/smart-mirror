@@ -1,7 +1,7 @@
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import connection from './connection';
 import { faceInfoToDBString } from '@/utils/face';
-import { timeToString } from '@/utils/time';
+import { readTimeToString } from '@/utils/time';
 
 interface Part {
   accMoveLeft: number;
@@ -55,7 +55,7 @@ export async function customerList(customer: string) {
 
     // 시간 형식 바꾸기
     for (const row of rows) {
-      row.time = timeToString(row.time);
+      row.time = readTimeToString(row.time);
     }
 
     return {
@@ -142,7 +142,7 @@ export async function adminList(
 
     const [rows] = await connection.execute<RowDataPacket[]>(query);
     for (const row of rows) {
-      row.time = timeToString(row.time);
+      row.time = readTimeToString(row.time);
     }
 
     return {
@@ -170,7 +170,7 @@ export async function adminChart(
   try {
     const [rows] = await connection.execute<RowDataPacket[]>(query);
     for (const row of rows) {
-      row.time = timeToString(row.time);
+      row.time = readTimeToString(row.time);
     }
     return {
       succeeded: true,
@@ -191,7 +191,7 @@ export async function customerChart(customer: string, expression: string) {
   try {
     const [rows] = await connection.execute<RowDataPacket[]>(query);
     for (const row of rows) {
-      row.time = timeToString(row.time);
+      row.time = readTimeToString(row.time);
     }
     return {
       succeeded: true,

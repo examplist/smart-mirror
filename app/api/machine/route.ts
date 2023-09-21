@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { timeToString } from '@/utils/time';
+import { writeTimeToString } from '@/utils/time';
 import * as ManipulateResults from '@/data/results';
 import afterResults from './afterResults';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   const { customer_name, customer_birth, smile, laugh, closeEye, openEye } =
     await req.json();
 
-  const time = timeToString(new Date());
+  const time = writeTimeToString(new Date());
   const customer = customer_name + '_' + customer_birth;
   const uuid = uuidv4();
 

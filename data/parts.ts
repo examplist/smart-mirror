@@ -1,6 +1,6 @@
 import { RowDataPacket } from 'mysql2';
 import connection from './connection';
-import { timeToString } from '@/utils/time';
+import { readTimeToString } from '@/utils/time';
 
 export async function add(
   exp_name: string,
@@ -132,7 +132,7 @@ export async function adminList(
     const [rowsCount] = await connection.execute<RowDataPacket[]>(queryCount);
     const [rows] = await connection.execute<RowDataPacket[]>(query);
     for (const row of rows) {
-      row.time = timeToString(row.time);
+      row.time = readTimeToString(row.time);
     }
 
     return {
