@@ -1,17 +1,25 @@
 // 헤더, 푸터 높이
-$header-height: 5rem;
+$header-height: 4.5rem;
 $footer-height: 12rem;
 
 // 반응형
-$screen-tiny: 473px;
-$screen-small: 640px;
-$screen-medium: 768px;
+$screen-tiny: 25rem;
+$screen-small: 42rem;
+$screen-medium: 48rem;
 
 @mixin only-message {
-  min-height: calc(100vh - $header-height - $footer-height);
+  // min-height: calc(100vh - $header-height - $footer-height);
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // font-size: 2rem;
+  // padding: 1.5rem;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
-  padding: 1.5rem;
+
+  font-size: 3rem;
+  font-weight: 700;
 }

@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore, FETCHED } from '@/store/auth';
 import { login } from '@/utils/auth/customer';
-import style from '@/styles/customer/login/Form.module.scss';
+import style from '@/styles/common/LoginForm.module.scss';
 
 export default function customerForm() {
   const [loading, setLoading] = useState<boolean>(false);

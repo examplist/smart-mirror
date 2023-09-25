@@ -1,15 +1,22 @@
 @use '../layout.scss';
+@use '../color.scss';
+
+@media (max-width: layout.$screen-small) {
+  .footer {
+    flex-direction: column;
+  }
+}
 
 .footer {
   height: layout.$footer-height;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: wheat;
+  background-color: color.$ghost_white;
 
   div {
-    margin: 0.5rem 0;
+    margin: 0.5rem;
     font-weight: 500;
+    color: color.$russian_violet;
   }
 }

@@ -1,14 +1,19 @@
 'use client';
 
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/utils/auth/admin';
-import style from '@/styles/admin/page.module.scss';
+import style from '@/styles/common/Start.module.scss';
+
+const greet = '안녕하세요? 스마트미러입니다.';
 
 export default function adminHome() {
   const { admin_status } = useAuthStore();
   const router = useRouter();
+
+  const click$toLogin = () => {
+    router.push('/admin/login');
+  };
 
   const click$buttonInfoTable = () => {
     router.push('/admin/list');
@@ -26,11 +31,9 @@ export default function adminHome() {
   if (admin_status === FAILED) {
     return (
       <main className={style['main']}>
-        <h1 className={style['greet']}>
-          안녕하세요? 스마트미러 관리자 페이지입니다.
-        </h1>
-        <div className={style['links']}>
-          <Link href={'/admin/login'}>로그인하기</Link>
+        <h1 className={style['greet']}>{greet}</h1>
+        <div className={style['buttons']}>
+          <button onClick={click$toLogin}>로그인하기</button>
         </div>
       </main>
     );
@@ -39,9 +42,7 @@ export default function adminHome() {
   if (admin_status === FETCHED) {
     return (
       <main className={style['main']}>
-        <h1 className={style['greet']}>
-          안녕하세요? 스마트미러 관리자 페이지입니다.
-        </h1>
+        <h1 className={style['greet']}>{greet}</h1>
         <div className={style['buttons']}>
           <button
             className={style['button-info-table']}

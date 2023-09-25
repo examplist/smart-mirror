@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header className={style['header']}>
       <div className={style['logo']} id="header-logo">
-        <Link href={'/'}>스마트미러</Link>
+        <Link href={'/'}>SMART M</Link>
       </div>
       <div className={style['empty']}></div>
     </header>

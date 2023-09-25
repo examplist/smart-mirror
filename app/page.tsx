@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Header />
       <main className={style['main']}>
-        <h1 className={style['greet']}>안녕하세요? 스마트미러입니다.</h1>
+        <h1 className={style['greet']}>SMART M</h1>
         <div className={style['links']}>
           <Link href={'/customer'}>고객 페이지로</Link>
           <Link href={'/admin'}>관리자 페이지로</Link>

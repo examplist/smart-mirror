@@ -1,4 +1,5 @@
 @use '../layout.scss';
+@use '../color.scss';
 
 $height: layout.$header-height;
 
@@ -7,8 +8,7 @@ $height: layout.$header-height;
   display: flex;
   align-items: center;
   padding: 1rem;
-  background-color: blueviolet;
-  color: white;
+  background-color: color.$russian_violet;
 }
 
 .logo {
@@ -17,13 +17,34 @@ $height: layout.$header-height;
   align-items: center;
 
   a {
-    color: darkkhaki;
+    color: color.$ghost_white;
     text-decoration: none;
     cursor: pointer;
-    font-size: 1.25rem;
+    font-size: 2rem;
+    font-weight: 900;
   }
 }
 
 .empty {
   flex-grow: 1;
+}
+
+.login {
+  a {
+    text-decoration: none;
+    color: color.$ghost_white;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+}
+
+.logout {
+  background-color: transparent;
+  color: color.$ghost_white;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
 }

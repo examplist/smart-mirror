@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
 import { logout } from '@/utils/auth/customer';
-import style from '@/styles/customer/Header.module.scss';
+import style from '@/styles/common/Header.module.scss';
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header className={style['header']}>
       <div className={style['logo']} id="header-logo">
-        <Link href={'/'}>스마트미러</Link>
+        <Link href={'/'}>SMART M</Link>
       </div>
       <div className={style['empty']}></div>
       {customer_status === FAILED ? (

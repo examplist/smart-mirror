@@ -1,4 +1,5 @@
 @use '../../layout.scss';
+@use '../../color.scss';
 
 .main {
   width: 100%;
@@ -111,9 +112,12 @@
   input[type='submit'] {
     width: 4rem;
     height: 2rem;
-    background-color: beige;
+    background-color: color.$light_silver;
     border: none;
     cursor: pointer;
+    &:hover {
+      background-color: color.$manatee;
+    }
   }
 }
 
@@ -141,8 +145,8 @@
 .items_list_name {
   display: flex;
   width: 50rem;
-  background-color: crimson;
-  color: white;
+  background-color: color.$light_silver;
+  color: black;
 
   .name {
     width: 7rem;
