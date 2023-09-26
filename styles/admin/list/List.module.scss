@@ -10,11 +10,15 @@
   flex-direction: column;
 }
 
+//////////////////////////////////////////
+// 검색
+//////////////////////////////////////////
+
 .form {
-  width: 50rem;
-  margin: 3rem;
+  width: 85%;
+  margin: 2rem 0;
   border: 3px solid black;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .customer {
@@ -27,24 +31,33 @@
     justify-content: center;
     align-items: center;
     width: 3rem;
+    font-weight: 600;
+    font-size: 1rem;
   }
 
-  input {
+  .name,
+  .birth {
+    display: flex;
     flex-grow: 1;
-    border-radius: 0;
-    border: 1px solid black;
-  }
 
-  input:first-of-type {
-    margin-right: 1rem;
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+
+    input {
+      flex-grow: 1;
+      border-radius: 0;
+      border: 1px solid black;
+    }
   }
 
   .name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 0.5rem;
-    font-size: 0.8rem;
+    input {
+      margin-right: 1rem;
+    }
   }
 }
 
@@ -58,19 +71,25 @@
     justify-content: center;
     align-items: center;
     width: 3rem;
+    font-weight: 600;
   }
 
-  input {
+  .inputs {
     flex-grow: 1;
-    border-radius: 0;
-    border: 1px solid black;
-  }
-
-  .tilde {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1rem;
+
+    input {
+      flex-grow: 1;
+      border-radius: 0;
+      border: 1px solid black;
+    }
+
+    .tilde {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1rem;
+    }
   }
 }
 
@@ -83,25 +102,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3rem;
+    min-width: 3rem;
+    font-weight: 600;
   }
 
-  select {
-    margin-right: 0.5rem;
-    border-radius: 0;
-    border: 1px solid black;
-  }
-
-  input[type='text'] {
-    flex-grow: 1;
-    border-radius: 0;
-    border: 1px solid black;
-  }
-  .tilde {
+  .selects {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1rem;
+    select {
+      margin-right: 0.5rem;
+      border-radius: 0;
+      border: 1px solid black;
+    }
+  }
+
+  .figures {
+    flex-grow: 1;
+    display: flex;
+    input[type='text'] {
+      flex-grow: 1;
+      border-radius: 0;
+      border: 1px solid black;
+    }
+    .tilde {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1rem;
+    }
   }
 }
 
@@ -136,20 +163,115 @@
   }
 }
 
+@media (max-width: layout.$screen-medium) {
+  .customer {
+    display: block;
+    height: auto;
+
+    label {
+      font-weight: 800;
+      font-size: 1.2rem;
+      height: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .name,
+    .birth {
+      height: 2rem;
+      margin-bottom: 0.5rem;
+      input {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .date {
+    display: block;
+    margin-bottom: 1rem;
+    height: auto;
+
+    label {
+      font-weight: 800;
+      font-size: 1.2rem;
+      height: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      display: block;
+      flex-grow: 1;
+      border-radius: 0;
+      border: 1px solid black;
+      height: 2rem;
+    }
+
+    .tilde {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1rem;
+      height: 2rem;
+    }
+  }
+
+  .field {
+    display: block;
+    margin-bottom: 1rem;
+    height: auto;
+
+    label {
+      font-weight: 800;
+      font-size: 1.2rem;
+      height: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .selects {
+      display: flex;
+      select {
+        margin-right: 0.5rem;
+        border-radius: 0;
+        border: 1px solid black;
+      }
+    }
+
+    .figures {
+      flex-grow: 1;
+      display: flex;
+      input[type='text'] {
+        flex-grow: 1;
+        border-radius: 0;
+        border: 1px solid black;
+      }
+      .tilde {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+      }
+    }
+  }
+}
+
+//////////////////////////////////////////
+// 목록
+//////////////////////////////////////////
+
 .lists {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 85%;
+}
+
+.inner-container {
+  width: 100%;
 }
 
 .items_list_name {
   display: flex;
-  width: 50rem;
   background-color: color.$light_silver;
   color: black;
 
   .name {
-    width: 7rem;
+    width: 15%;
     font-size: 1.2rem;
     display: flex;
     justify-content: center;
@@ -157,7 +279,7 @@
   }
 
   .birth {
-    width: 10rem;
+    width: 25%;
     font-size: 1.2rem;
     display: flex;
     justify-content: center;
@@ -165,7 +287,7 @@
   }
 
   .time {
-    width: 20rem;
+    width: 40%;
     font-size: 1.2rem;
     display: flex;
     justify-content: center;
@@ -173,7 +295,7 @@
   }
 
   .link {
-    flex-grow: 1;
+    width: 20%;
     font-size: 1.2rem;
     padding: 0.5rem;
     display: flex;
@@ -181,8 +303,20 @@
   }
 }
 
-.items_list {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+@media (max-width: layout.$screen-medium) {
+  .lists {
+    overflow-x: auto;
+  }
+
+  .inner-container {
+    width: 45rem;
+  }
+
+  .items_list_name {
+    width: 45rem;
+  }
+
+  .items_list {
+    width: 45rem;
+  }
 }

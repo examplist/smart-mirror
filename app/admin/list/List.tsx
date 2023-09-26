@@ -87,44 +87,54 @@ export default function List() {
       <form className={style['form']} onSubmit={submit$form}>
         <div className={style['customer']}>
           <label>고객:</label>
-          <div className={style['name']}>이름 -</div>
-          <input type="text" ref={refCustomerName} />
-          <div className={style['name']}>생년월일 -</div>
-          <input type={'date'} ref={refCustomerBirth} />
+          <div className={style['name']}>
+            <div>이름 - </div>
+            <input type="text" ref={refCustomerName} />
+          </div>
+          <div className={style['birth']}>
+            <div>생년월일 - </div>
+            <input type={'date'} ref={refCustomerBirth} />
+          </div>
         </div>
         <div className={style['date']}>
           <label>날짜:</label>
-          <input type="date" ref={refDateFront} />
-          <div className={style['tilde']}>~</div>
-          <input type="date" ref={refDateBack} />
+          <div className={style['inputs']}>
+            <input type="date" ref={refDateFront} />
+            <div className={style['tilde']}>~</div>
+            <input type="date" ref={refDateBack} />
+          </div>
         </div>
         <div className={style['field']}>
           <label>부분:</label>
-          <select name="expression" ref={refExpression}>
-            <option value="">선택 안 함</option>
-            <option value="smile">미소짓기</option>
-            <option value="laugh">크게웃기</option>
-            <option value="closeEye">눈감기</option>
-            <option value="openEye">눈크게뜨기</option>
-          </select>
-          <select name="part" ref={refPart}>
-            <option value="">선택 안 함</option>
-            <option value="eyebrow">눈썹</option>
-            <option value="eye">눈</option>
-            <option value="cheek">뺨</option>
-            <option value="mouse">입</option>
-          </select>
-          <select name="move" ref={refMove}>
-            <option value="">선택 안 함</option>
-            <option value="accMoveLeft">좌_누적이동량</option>
-            <option value="maxMeasureLeft">좌_최대실측치</option>
-            <option value="accMoveRight">우_누적이동량</option>
-            <option value="maxMeasureRight">우_최대실측치</option>
-            <option value="symmetry">좌우대칭성점수</option>
-          </select>
-          <input type="text" placeholder="최소치" ref={refValueMin} />
-          <div className={style['tilde']}>~</div>
-          <input type="text" placeholder="최대치" ref={refValueMax} />
+          <div className={style['selects']}>
+            <select name="expression" ref={refExpression}>
+              <option value="">선택 안 함</option>
+              <option value="smile">미소짓기</option>
+              <option value="laugh">크게웃기</option>
+              <option value="closeEye">눈감기</option>
+              <option value="openEye">눈크게뜨기</option>
+            </select>
+            <select name="part" ref={refPart}>
+              <option value="">선택 안 함</option>
+              <option value="eyebrow">눈썹</option>
+              <option value="eye">눈</option>
+              <option value="cheek">뺨</option>
+              <option value="mouse">입</option>
+            </select>
+            <select name="move" ref={refMove}>
+              <option value="">선택 안 함</option>
+              <option value="accMoveLeft">좌_누적이동량</option>
+              <option value="maxMeasureLeft">좌_최대실측치</option>
+              <option value="accMoveRight">우_누적이동량</option>
+              <option value="maxMeasureRight">우_최대실측치</option>
+              <option value="symmetry">좌우대칭성점수</option>
+            </select>
+          </div>
+          <div className={style['figures']}>
+            <input type="text" placeholder="최소치" ref={refValueMin} />
+            <div className={style['tilde']}>~</div>
+            <input type="text" placeholder="최대치" ref={refValueMax} />
+          </div>
         </div>
         <div className={style['explanation']}>
           <h3>사용법</h3>
@@ -152,25 +162,27 @@ export default function List() {
         </div>
       </form>
       <section className={style['lists']}>
-        <div className={style['items_list_name']}>
-          <div className={style['name']}>이름</div>
-          <div className={style['birth']}>생년월일</div>
-          <div className={style['time']}>시간</div>
-          <div className={style['link']}>링크</div>
-        </div>
-        <div className={style['items_list']}>
-          {items.map((item) => {
-            const { customer_name, customer_birth, time, uuid } = item;
-            return (
-              <Item
-                key={uuid}
-                customer_name={customer_name}
-                customer_birth={customer_birth}
-                time={time}
-                uuid={uuid}
-              />
-            );
-          })}
+        <div className={style['inner-container']}>
+          <div className={style['items_list_name']}>
+            <div className={style['name']}>이름</div>
+            <div className={style['birth']}>생년월일</div>
+            <div className={style['time']}>시간</div>
+            <div className={style['link']}>링크</div>
+          </div>
+          <div className={style['items_list']}>
+            {items.map((item) => {
+              const { customer_name, customer_birth, time, uuid } = item;
+              return (
+                <Item
+                  key={uuid}
+                  customer_name={customer_name}
+                  customer_birth={customer_birth}
+                  time={time}
+                  uuid={uuid}
+                />
+              );
+            })}
+          </div>
         </div>
       </section>
       <Paginate pageCount={pageCount} getLists={getLists} currentPage={1} />
