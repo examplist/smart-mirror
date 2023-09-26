@@ -35,15 +35,17 @@ export default function List({ customer }: { customer: string }) {
 
   return (
     <div className={style['lists']}>
-      <div className={style['items_list_name']}>
-        <div className={style['time']}>시간</div>
-        <div className={style['link']}>링크</div>
-      </div>
-      <div className={style['items_list']}>
-        {items.map((item) => {
-          const { time, uuid } = item;
-          return <Item time={time} uuid={uuid} key={uuid} />;
-        })}
+      <div className={style['inner-container']}>
+        <div className={style['items_list_name']}>
+          <div className={style['time']}>시간</div>
+          <div className={style['link']}>링크</div>
+        </div>
+        <div className={style['items_list']}>
+          {items.map((item) => {
+            const { time, uuid } = item;
+            return <Item time={time} uuid={uuid} key={uuid} />;
+          })}
+        </div>
       </div>
     </div>
   );

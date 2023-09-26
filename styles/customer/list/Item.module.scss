@@ -1,11 +1,10 @@
 .section {
-  display: flex;
-  // width: 40rem;
   width: 100%;
+  display: flex;
 }
 
 .time {
-  width: 20rem;
+  width: 70%;
   font-size: 1.2rem;
   display: flex;
   justify-content: center;
@@ -13,7 +12,7 @@
 }
 
 .link {
-  flex-grow: 1;
+  width: 30%;
   padding: 0.5rem;
   display: flex;
   justify-content: center;
