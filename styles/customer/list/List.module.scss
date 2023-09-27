@@ -1,4 +1,5 @@
 @use '../../layout.scss';
+@use '../../color.scss';
 
 @media (max-width: layout.$screen-small) {
   .lists {
@@ -28,8 +29,8 @@
 
 .items_list_name {
   display: flex;
-  background-color: crimson;
-  color: white;
+  background-color: color.$light_silver;
+  color: black;
 
   .time {
     width: 70%;

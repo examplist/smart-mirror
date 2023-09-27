@@ -84,34 +84,38 @@ export default function List({ customer }: { customer: string }) {
     <main className={style['main']}>
       <form className={style['form']} onSubmit={submit$form}>
         <div className={style['customer']}>
-          <label>표정:</label>
-          <select name="expression" ref={refExpression}>
-            <option value="">선택 안 함</option>
-            <option value="smile">미소짓기</option>
-            <option value="laugh">크게웃기</option>
-            <option value="closeEye">눈감기</option>
-            <option value="openEye">눈크게뜨기</option>
-          </select>
-          <label>부위:</label>
-          <select name="part" ref={refPart}>
-            <option value="">선택 안 함</option>
-            <option value="eyebrow">눈썹</option>
-            <option value="eye">눈</option>
-            <option value="cheek">뺨</option>
-            <option value="mouse">입</option>
-          </select>
+          <div className={style['expression']}>
+            <label>표정:</label>
+            <select name="expression" ref={refExpression}>
+              <option value="">선택 안 함</option>
+              <option value="smile">미소짓기</option>
+              <option value="laugh">크게웃기</option>
+              <option value="closeEye">눈감기</option>
+              <option value="openEye">눈크게뜨기</option>
+            </select>
+          </div>
+          <div className={style['part']}>
+            <label>부위:</label>
+            <select name="part" ref={refPart}>
+              <option value="">선택 안 함</option>
+              <option value="eyebrow">눈썹</option>
+              <option value="eye">눈</option>
+              <option value="cheek">뺨</option>
+              <option value="mouse">입</option>
+            </select>
+          </div>
         </div>
-        <div className={style['explanation']}>
+        {/* <div className={style['explanation']}>
           <h3>사용법</h3>
           <p>고객을 지정하는 경우, 이름과 생년월일을 모두 입력하셔야 합니다.</p>
-        </div>
+        </div> */}
         <div className={style['submit']}>
           <input type="submit" value="검색" />
         </div>
       </form>
-      <section className={style['lists']}>
+      {/* <section className={style['lists']}>
         <div className={style['items_list']}></div>
-      </section>
+      </section> */}
       <section>
         <Chart moveType={'accMoveLeft'} moveData={accMoveLeft} />
         <Chart moveType={'maxMeasureLeft'} moveData={maxMeasureLeft} />
