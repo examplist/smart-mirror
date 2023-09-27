@@ -97,14 +97,18 @@ export default function List() {
   return (
     <main className={style['main']}>
       <form className={style['form']} onSubmit={submit$form}>
-        <div className={style['customer']}>
+        <div className={style['search']}>
           <div className={style['name']}>
             <label>이름:</label>
             <input type="text" ref={refCustomerName} />
           </div>
           <div className={style['birth']}>
             <label>생년월일:</label>
-            <input type={'date'} ref={refCustomerBirth} />
+            <input
+              type={'text'}
+              ref={refCustomerBirth}
+              placeholder={'예) 2023-09-11'}
+            />
           </div>
           <div className={style['expression']}>
             <label>표정:</label>
@@ -131,12 +135,22 @@ export default function List() {
           <input type="submit" value="검색" />
         </div>
       </form>
-      <section>
-        <Chart moveType={'accMoveLeft'} moveData={accMoveLeft} />
-        <Chart moveType={'maxMeasureLeft'} moveData={maxMeasureLeft} />
-        <Chart moveType={'accMoveRight'} moveData={accMoveRight} />
-        <Chart moveType={'maxMeasureRight'} moveData={maxMeasureRight} />
-        <Chart moveType={'symmetry'} moveData={symmetry} />
+      <section className={style['charts']}>
+        <div className={style['chart']}>
+          <Chart moveType={'accMoveLeft'} moveData={accMoveLeft} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'maxMeasureLeft'} moveData={maxMeasureLeft} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'accMoveRight'} moveData={accMoveRight} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'maxMeasureRight'} moveData={maxMeasureRight} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'symmetry'} moveData={symmetry} />
+        </div>
       </section>
     </main>
   );

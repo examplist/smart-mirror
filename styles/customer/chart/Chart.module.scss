@@ -1,13 +1,23 @@
+@use '../../layout.scss';
+
 .title {
   height: 3rem;
   font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0.7rem 0;
 }
 
 .section {
   height: 20rem;
   min-width: 22rem;
-  width: 80vw;
+  width: 100%;
+}
+
+@media (max-width: layout.$screen-tiny) {
+  .title,
+  .section {
+    width: 40rem;
+  }
 }

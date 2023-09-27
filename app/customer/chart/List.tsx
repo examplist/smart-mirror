@@ -83,7 +83,7 @@ export default function List({ customer }: { customer: string }) {
   return (
     <main className={style['main']}>
       <form className={style['form']} onSubmit={submit$form}>
-        <div className={style['customer']}>
+        <div className={style['search']}>
           <div className={style['expression']}>
             <label>표정:</label>
             <select name="expression" ref={refExpression}>
@@ -105,23 +105,26 @@ export default function List({ customer }: { customer: string }) {
             </select>
           </div>
         </div>
-        {/* <div className={style['explanation']}>
-          <h3>사용법</h3>
-          <p>고객을 지정하는 경우, 이름과 생년월일을 모두 입력하셔야 합니다.</p>
-        </div> */}
         <div className={style['submit']}>
           <input type="submit" value="검색" />
         </div>
       </form>
-      {/* <section className={style['lists']}>
-        <div className={style['items_list']}></div>
-      </section> */}
-      <section>
-        <Chart moveType={'accMoveLeft'} moveData={accMoveLeft} />
-        <Chart moveType={'maxMeasureLeft'} moveData={maxMeasureLeft} />
-        <Chart moveType={'accMoveRight'} moveData={accMoveRight} />
-        <Chart moveType={'maxMeasureRight'} moveData={maxMeasureRight} />
-        <Chart moveType={'symmetry'} moveData={symmetry} />
+      <section className={style['charts']}>
+        <div className={style['chart']}>
+          <Chart moveType={'accMoveLeft'} moveData={accMoveLeft} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'maxMeasureLeft'} moveData={maxMeasureLeft} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'accMoveRight'} moveData={accMoveRight} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'maxMeasureRight'} moveData={maxMeasureRight} />
+        </div>
+        <div className={style['chart']}>
+          <Chart moveType={'symmetry'} moveData={symmetry} />
+        </div>
       </section>
     </main>
   );

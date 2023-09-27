@@ -50,6 +50,7 @@
       flex-grow: 1;
       border-radius: 0;
       border: 1px solid black;
+      padding-left: 0.3rem;
     }
   }
 
@@ -80,6 +81,7 @@
       flex-grow: 1;
       border-radius: 0;
       border: 1px solid black;
+      padding-left: 0.3rem;
     }
 
     .tilde {
@@ -105,23 +107,28 @@
 
   .selects {
     display: flex;
+
     select {
       margin-right: 0.5rem;
       border-radius: 0;
       border: 1px solid black;
+      padding-left: 0.3rem;
     }
   }
 
   .figures {
     flex-grow: 1;
     display: flex;
+
     input[type='text'] {
       flex-grow: 1;
       width: 45%;
       min-width: 45%;
       border-radius: 0;
       border: 1px solid black;
+      padding-left: 0.3rem;
     }
+
     .tilde {
       display: flex;
       justify-content: center;
@@ -141,6 +148,7 @@
     background-color: color.$light_silver;
     border: none;
     cursor: pointer;
+
     &:hover {
       background-color: color.$manatee;
     }
@@ -177,6 +185,7 @@
     .birth {
       height: 2rem;
       margin-bottom: 0.5rem;
+
       input {
         margin-right: 0;
       }
@@ -245,12 +254,14 @@
     .figures {
       flex-grow: 1;
       display: flex;
+
       input[type='text'] {
         flex-grow: 1;
         border-radius: 0;
         border: 1px solid black;
         height: 2rem;
       }
+
       .tilde {
         display: flex;
         justify-content: center;

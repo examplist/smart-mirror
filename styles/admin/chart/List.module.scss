@@ -16,7 +16,7 @@
   padding: 1.5rem;
 }
 
-.customer {
+.search {
   display: flex;
   margin-bottom: 2rem;
   height: 2rem;
@@ -35,11 +35,13 @@
       width: auto;
       margin-right: 0.5rem;
     }
+
     input,
     select {
       flex-grow: 1;
       border-radius: 0;
       border: 1px solid black;
+      padding-left: 0.3rem;
     }
   }
 
@@ -64,7 +66,7 @@
 }
 
 @media (max-width: layout.$screen-big) {
-  .customer {
+  .search {
     display: block;
     height: auto;
   }
@@ -76,5 +78,17 @@
     margin-right: 1rem;
     margin-bottom: 1rem;
     height: 2rem;
+  }
+}
+
+.charts {
+  width: 85%;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: layout.$screen-tiny) {
+  .chart {
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
 }

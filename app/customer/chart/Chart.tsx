@@ -7,7 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 import { moveToKor } from '@/utils/lang';
@@ -27,8 +26,6 @@ export default function Chart({
       <section className={style['section']}>
         <ResponsiveContainer>
           <LineChart
-            width={600}
-            height={200}
             data={moveData}
             margin={{
               top: 5,
@@ -41,9 +38,7 @@ export default function Chart({
             <XAxis dataKey="time" />
             <YAxis />
             <Tooltip />
-            {/* <Legend /> */}
             <Line
-              // name="수치"
               type="monotone"
               dataKey="value"
               stroke="#8884d8"
