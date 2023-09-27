@@ -121,7 +121,7 @@ export default function List() {
               <option value="cheek">뺨</option>
               <option value="mouse">입</option>
             </select>
-            <select name="move" ref={refMove}>
+            <select name="move" ref={refMove} className={style['move']}>
               <option value="">선택 안 함</option>
               <option value="accMoveLeft">좌_누적이동량</option>
               <option value="maxMeasureLeft">좌_최대실측치</option>

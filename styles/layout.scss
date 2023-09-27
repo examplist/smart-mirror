@@ -5,15 +5,9 @@ $footer-height: 12rem;
 // 반응형
 $screen-tiny: 25rem;
 $screen-small: 42rem;
-$screen-medium: 48rem;
+$screen-medium: 50rem;
 
 @mixin only-message {
-  // min-height: calc(100vh - $header-height - $footer-height);
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // font-size: 2rem;
-  // padding: 1.5rem;
   width: 100%;
   height: 100%;
   display: flex;
