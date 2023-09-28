@@ -1,6 +1,6 @@
 'use client';
 
-import style from '@/styles/customer/item/Part.module.scss';
+import style from '@/styles/common/item/Part.module.scss';
 
 export default function Part({
   type,

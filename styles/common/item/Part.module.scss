@@ -1,10 +1,15 @@
+@use '../../layout.scss';
+@use '../../color.scss';
+
 .title {
   text-align: center;
-  background-color: gold;
+  background-color: color.$alice_blue;
+  padding: 0.5rem 0;
 }
 
 .table {
   width: 100%;
+  margin-bottom: 0.5rem;
 
   thead {
     tr {
@@ -12,6 +17,7 @@
         border: 1px solid black;
         border-collapse: collapse;
         font-weight: 800;
+        padding: 0.5rem 0;
       }
     }
   }
@@ -22,7 +28,15 @@
         border: 1px solid black;
         border-collapse: collapse;
         text-align: center;
+        padding: 0.5rem 0;
       }
     }
+  }
+}
+
+@media (max-width: layout.$screen-medium) {
+  .title {
+    text-align: left;
+    padding-left: 0.5rem;
   }
 }

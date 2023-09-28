@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Expression from './Expression';
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
-import style from '@/styles/customer/item/page.module.scss';
+import style from '@/styles/common/item/page.module.scss';
 
 export default function customerItem({ params }: { params: { id: string } }) {
   const { customer_status } = useAuthStore();

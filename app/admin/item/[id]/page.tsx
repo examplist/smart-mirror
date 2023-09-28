@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Expression from './Expression';
 import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
-import style from '@/styles/admin/item/page.module.scss';
+import style from '@/styles/common/item/page.module.scss';
 
 export default function adminItem({ params }: { params: { id: string } }) {
   const { admin_status, admin_id } = useAuthStore();
