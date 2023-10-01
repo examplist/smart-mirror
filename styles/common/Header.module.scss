@@ -48,3 +48,19 @@ $height: layout.$header-height;
   align-items: center;
   font-size: 1.2rem;
 }
+
+// admin인 경우 색 변경
+.header.admin {
+  background-color: color.$manatee;
+
+  .logo,
+  .login {
+    a {
+      color: color.$russian_violet;
+    }
+  }
+
+  .logout {
+    color: color.$russian_violet;
+  }
+}

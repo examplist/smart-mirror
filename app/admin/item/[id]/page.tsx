@@ -40,9 +40,7 @@ export default function adminItem({ params }: { params: { id: string } }) {
   if (admin_status === FAILED) {
     return (
       <main className={style['main']}>
-        <section className={style['only-message']}>
-          로그인을 하셔야 합니다.
-        </section>
+        <section className={style['logout']}>로그인을 하셔야 합니다.</section>
       </main>
     );
   }
@@ -50,7 +48,7 @@ export default function adminItem({ params }: { params: { id: string } }) {
   if (admin_id === null) {
     return (
       <main className={style['main']}>
-        <section className={style['only-message']}>로딩 중</section>
+        <section className={style['loading']}>로딩 중</section>
       </main>
     );
   }

@@ -1,7 +1,7 @@
 import { useState, useRef, FormEvent } from 'react';
-import style from '@/styles/admin/chart/List.module.scss';
 import Chart from './Chart';
 import { getExpDataFromString } from '@/utils/face';
+import style from '@/styles/admin/chart/List.module.scss';
 
 export interface Move {
   value: number;

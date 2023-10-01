@@ -6,7 +6,7 @@ import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
 import style from '@/styles/common/item/page.module.scss';
 
 export default function customerItem({ params }: { params: { id: string } }) {
-  const { customer_status } = useAuthStore();
+  const { customer_status, customer_id } = useAuthStore();
 
   const { id } = params;
   const [smile, setSmile] = useState<any>();
@@ -40,9 +40,15 @@ export default function customerItem({ params }: { params: { id: string } }) {
   if (customer_status === FAILED) {
     return (
       <main className={style['main']}>
-        <section className={style['only-message']}>
-          로그인을 하셔야 합니다.
-        </section>
+        <section className={style['logout']}>로그인을 하셔야 합니다.</section>
+      </main>
+    );
+  }
+
+  if (customer_id === null) {
+    return (
+      <main className={style['main']}>
+        <section className={style['loading']}>로딩 중</section>
       </main>
     );
   }
@@ -57,12 +63,4 @@ export default function customerItem({ params }: { params: { id: string } }) {
       </main>
     );
   }
-
-  return (
-    <main className={style['main']}>
-      <section className={style['only-message']}>
-        로그인을 하셔야 합니다.
-      </section>
-    </main>
-  );
 }

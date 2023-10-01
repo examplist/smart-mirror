@@ -13,7 +13,7 @@ export default function Header() {
   };
 
   return (
-    <header className={style['header']}>
+    <header className={`${style['header']} ${style['admin']}`}>
       <div className={style['logo']} id="header-logo">
         <Link href={'/'}>SMART M</Link>
       </div>

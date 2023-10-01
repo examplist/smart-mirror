@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore, FETCHED } from '@/store/auth';
 import { login } from '@/utils/auth/customer';
-import style from '@/styles/common/LoginForm.module.scss';
+import style from '@/styles/common/login/Form.module.scss';
 
 export default function customerForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,7 +50,7 @@ export default function customerForm() {
   };
 
   return (
-    <section className={style['not-logged-in']} id="sign-form">
+    <section className={style['section']} id="sign-form">
       <label htmlFor="name" className={style['label']}>
         이름
       </label>

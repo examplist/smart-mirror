@@ -3,7 +3,7 @@
 
 .main {
   width: 100%;
-  height: calc(100vh - layout.$header-height - layout.$footer-height);
+  min-height: calc(100vh - layout.$header-height - layout.$footer-height);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,8 +12,8 @@
 
 .greet {
   font-size: 3rem;
-  padding: 2rem;
   text-align: center;
+  padding: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -43,12 +43,24 @@
 }
 
 @media (max-width: layout.$screen-medium) {
+  .greet {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
   .buttons {
     flex-direction: column;
     button {
       margin-right: 0;
       margin-bottom: 1rem;
     }
+  }
+}
+
+@media (max-width: layout.$screen-tiny) {
+  .greet {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
   }
 }
 

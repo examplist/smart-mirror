@@ -1,7 +1,8 @@
-@use '../color.scss';
+@use '../../color.scss';
 
-.not-logged-in {
-  width: 23rem;
+.section {
+  width: 80%;
+  max-width: 23rem;
 }
 
 .label {

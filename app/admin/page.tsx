@@ -66,7 +66,7 @@ export default function adminHome() {
 
   return (
     <main className={style['main']}>
-      <section className={style['only-message']}>로딩 중</section>
+      <section className={style['loading']}>로딩 중</section>
     </main>
   );
 }

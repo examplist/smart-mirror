@@ -30,25 +30,32 @@
 
     label {
       display: flex;
-      justify-content: center;
+      justify-content: end;
       align-items: center;
-      width: auto;
+      width: 3rem;
       margin-right: 0.5rem;
     }
 
     input,
     select {
-      flex-grow: 1;
+      // flex-grow: 1;
+      width: 80%;
       border-radius: 0;
       border: 1px solid black;
       padding-left: 0.3rem;
     }
   }
 
+  .birth {
+    label {
+      width: 6rem;
+    }
+  }
+
   .name,
   .birth,
   .expression {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
 }
 
@@ -69,15 +76,19 @@
   .search {
     display: block;
     height: auto;
-  }
+    .name,
+    .birth,
+    .expression,
+    .part {
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      height: 2rem;
 
-  .name,
-  .birth,
-  .expression,
-  .part {
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    height: 2rem;
+      label {
+        width: 5.2rem;
+        flex-shrink: 0;
+      }
+    }
   }
 }
 
@@ -87,6 +98,10 @@
 }
 
 @media (max-width: layout.$screen-tiny) {
+  .form {
+    padding: 1rem;
+  }
+
   .chart {
     overflow-x: scroll;
     overflow-y: hidden;

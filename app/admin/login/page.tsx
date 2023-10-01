@@ -1,22 +1,13 @@
 'use client';
 
-import { useAuthStore } from '@/store/auth';
+import { useAuthStore, FAILED, FETCHED } from '@/store/auth';
 import Form from './Form';
-import style from '@/styles/admin/login/page.module.scss';
-import { FAILED, FETCHED } from '@/store/auth';
+import style from '@/styles/common/login/page.module.scss';
 
 export default function customerLogin() {
-  const { admin_status } = useAuthStore();
+  const { admin_status, admin_id } = useAuthStore();
 
-  if (admin_status === FETCHED) {
-    return (
-      <main className={style['main']}>
-        <section className={style['only-message']}>
-          이미 로그인을 하셨습니다.
-        </section>
-      </main>
-    );
-  }
+  // ! 이 순서를 꼭 맞춰야 한다. FAILED > null > FETCHED
 
   if (admin_status === FAILED) {
     return (
@@ -26,9 +17,19 @@ export default function customerLogin() {
     );
   }
 
-  return (
-    <main className={style['main']}>
-      <section className={style['only-message']}>로딩 중</section>
-    </main>
-  );
+  if (admin_id === null) {
+    return (
+      <main className={style['main']}>
+        <section className={style['loading']}>로딩 중</section>
+      </main>
+    );
+  }
+
+  if (admin_status === FETCHED) {
+    return (
+      <main className={style['main']}>
+        <section className={style['logout']}>이미 로그인을 하셨습니다.</section>
+      </main>
+    );
+  }
 }
