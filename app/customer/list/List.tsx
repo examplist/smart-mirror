@@ -23,10 +23,9 @@ export default function List({ customer }: { customer: string }) {
           customer,
         }),
       });
-
       const { succeeded, results } = await response.json();
-
       if (!succeeded) {
+        alert('죄송합니다. 문제가 발생했습니다.');
       } else {
         setItems(results);
       }

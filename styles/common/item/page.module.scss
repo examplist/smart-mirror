@@ -10,6 +10,7 @@
 }
 
 .logout,
-.loading {
+.loading,
+.nothing {
   @include layout.only-message;
 }

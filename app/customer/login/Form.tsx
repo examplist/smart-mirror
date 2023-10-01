@@ -33,7 +33,6 @@ export default function customerForm() {
         }),
       });
       const { succeeded, id } = await response.json();
-
       if (!succeeded) {
         alert('죄송합니다. 문제가 발생했습니다.');
         setLoading(false);

@@ -16,7 +16,7 @@ export default function customerItem({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch('/api/customer/item', {
+      const response = await fetch('/api/common/item', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,9 +25,14 @@ export default function customerItem({ params }: { params: { id: string } }) {
           id,
         }),
       });
+      if (response.status === 404) {
+        alert('죄송합니다. 자료를 가져오는 데 문제가 발생했습니다.');
+        return;
+      }
       const { succeeded, result } = await response.json();
-
       if (!succeeded) {
+        alert('죄송합니다. 자료를 가져오는 데 문제가 발생했습니다.');
+        return;
       } else {
         setSmile(result.smile);
         setLaugh(result.laugh);
@@ -54,13 +59,23 @@ export default function customerItem({ params }: { params: { id: string } }) {
   }
 
   if (customer_status === FETCHED) {
-    return (
-      <main className={style['content']}>
-        <Expression bundle={smile} type={'smile'} />
-        <Expression bundle={laugh} type={'laugh'} />
-        <Expression bundle={closeEye} type={'closeEye'} />
-        <Expression bundle={openEye} type={'openEye'} />
-      </main>
-    );
+    if (smile) {
+      return (
+        <main>
+          <Expression bundle={smile} type={'smile'} />
+          <Expression bundle={laugh} type={'laugh'} />
+          <Expression bundle={closeEye} type={'closeEye'} />
+          <Expression bundle={openEye} type={'openEye'} />
+        </main>
+      );
+    } else {
+      return (
+        <main className={style['main']}>
+          <section className={style['nothing']}>
+            해당되는 자료가 없습니다.
+          </section>
+        </main>
+      );
+    }
   }
 }

@@ -9,6 +9,7 @@ export interface Move {
 }
 
 export default function List() {
+  const [loading, setLoading] = useState<boolean>(false);
   const [accMoveLeft, setAccMoveLeft] = useState<Move[]>([]);
   const [maxMeasureLeft, setMaxMeasureLeft] = useState<Move[]>([]);
   const [accMoveRight, setAccMoveRight] = useState<Move[]>([]);
@@ -25,12 +26,10 @@ export default function List() {
     const inputCustomerBirth = refCustomerBirth.current?.value;
     const inputExpression = refExpression.current?.value;
     const inputPart = refPart.current?.value;
-
     if (inputExpression === undefined || inputPart === undefined) {
       alert('죄송합니다. 문제가 발생했습니다.');
       return;
     }
-
     if (
       inputCustomerName === '' ||
       inputCustomerBirth === '' ||
@@ -40,7 +39,7 @@ export default function List() {
       alert('모든 항목을 입력하셔야 합니다!');
       return;
     }
-
+    setLoading(true);
     const response = await fetch('/api/admin/chart', {
       method: 'POST',
       headers: {
@@ -52,20 +51,19 @@ export default function List() {
         expression: inputExpression,
       }),
     });
-
     const { succeeded, results } = await response.json();
-
     const arrAccMoveLeft: Move[] = [];
     const arrMaxMeasureLeft: Move[] = [];
     const arrAccMoveRight: Move[] = [];
     const arrMaxMeasureRight: Move[] = [];
     const arrSymmetry: Move[] = [];
-
     if (!succeeded) {
-      alert('문제 발생');
+      alert('죄송합니다. 문제가 발생했습니다.');
+      setLoading(false);
       return;
     } else if (results.length === 0) {
       alert('해당 환자가 존재하지 않습니다.');
+      setLoading(false);
       return;
     } else {
       results.forEach((result: any) => {
@@ -80,12 +78,12 @@ export default function List() {
         arrMaxMeasureRight.push({ value: congregated[3], time });
         arrSymmetry.push({ value: congregated[4], time });
       });
-
       setAccMoveLeft(arrAccMoveLeft.reverse());
       setMaxMeasureLeft(arrMaxMeasureLeft.reverse());
       setAccMoveRight(arrAccMoveRight.reverse());
       setMaxMeasureRight(arrMaxMeasureRight.reverse());
       setSymmetry(arrSymmetry.reverse());
+      setLoading(false);
     }
   }
 
@@ -132,7 +130,7 @@ export default function List() {
           </div>
         </div>
         <div className={style['submit']}>
-          <input type="submit" value="검색" />
+          <input type="submit" value="검색" disabled={loading} />
         </div>
       </form>
       <section className={style['charts']}>

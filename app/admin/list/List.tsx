@@ -7,14 +7,13 @@ interface AdminItem {
   uuid: string;
 }
 
-import { useEffect, useState, useRef, FormEvent } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import Item from './Item';
 import Paginate from './Paginate';
 import style from '@/styles/admin/list/List.module.scss';
 
 export default function List() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [fetchSucceeded, setFetchSucceeded] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [items, setItems] = useState<AdminItem[]>([]);
   const [pageCount, setPageCount] = useState<number>(1);
 
@@ -39,6 +38,7 @@ export default function List() {
     const inputValueMin = refValueMin.current?.value;
     const inputValueMax = refValueMax.current?.value;
 
+    setLoading(true);
     const response = await fetch('/api/admin/list', {
       method: 'POST',
       headers: {
@@ -57,11 +57,10 @@ export default function List() {
         page,
       }),
     });
-
     const { succeeded, results, count } = await response.json();
-
     if (!succeeded) {
-      alert('문제 발생');
+      alert('죄송합니다. 문제가 발생했습니다.');
+      setLoading(false);
     } else {
       const resultsCustomerSplitted = results.map((result: any) => {
         const [customer_name, customer_birth] = result.customer.split('_');
@@ -74,6 +73,7 @@ export default function List() {
       });
       setItems(resultsCustomerSplitted);
       setPageCount(Math.ceil(count / 4));
+      setLoading(false);
     }
   }
 
@@ -93,7 +93,11 @@ export default function List() {
           </div>
           <div className={style['birth']}>
             <div>생년월일 - </div>
-            <input type={'date'} ref={refCustomerBirth} />
+            <input
+              type={'text'}
+              placeholder={'예) 2023-09-11'}
+              ref={refCustomerBirth}
+            />
           </div>
         </div>
         <div className={style['date']}>
@@ -158,7 +162,7 @@ export default function List() {
           </p>
         </div>
         <div className={style['submit']}>
-          <input type="submit" value="검색" />
+          <input type="submit" value="검색" disabled={loading} />
         </div>
       </form>
       <section className={style['lists']}>
