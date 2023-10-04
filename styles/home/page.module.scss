@@ -2,12 +2,7 @@
 @use '../color.scss';
 
 .main {
-  width: 100%;
-  min-height: calc(100vh - layout.$header-height - layout.$footer-height);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @include layout.main-class;
   padding: 2rem;
 }
 
