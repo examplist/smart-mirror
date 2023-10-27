@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { logout } from '@/utils/auth/admin';
 import style from '@/styles/common/Start.module.scss';
 
-const greet = '안녕하세요? 스마트미러입니다.';
+const greet = `안녕하세요? 'I' MIRROR입니다.`;
 
 export default function adminHome() {
   const { admin_status } = useAuthStore();

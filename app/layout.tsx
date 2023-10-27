@@ -7,8 +7,8 @@ import '@/styles/globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '스마트미러',
-  description: '스마트미러입니다.',
+  title: `'I' MIRROR`,
+  description: `'I' MIRROR입니다.`,
 };
 
 export default function RootLayout({

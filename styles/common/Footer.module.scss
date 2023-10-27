@@ -20,4 +20,19 @@
     font-weight: 500;
     color: color.$russian_violet;
   }
+
+  .wrapper {
+    display: flex;
+    div {
+      margin-right: 0.5rem;
+      margin-left: 0.5rem;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: layout.$screen-small) {
+  .wrapper {
+    flex-direction: column;
+  }
 }
