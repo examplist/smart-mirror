@@ -61,8 +61,11 @@ export async function adminList(
   let queryDateBack = '';
   let queryValueMin = '';
   let queryValueMax = '';
-  let queryPage = ` ORDER BY time DESC LIMIT ${(page - 1) * 4} , 4`;
+  let queryPage = ` ORDER BY results.time DESC LIMIT ${(page - 1) * 4} , 4`;
   let prevCondition = false;
+  let queryCountCustomer = '';
+  let queryCountDateFront = '';
+  let queryCountDateBack = '';
 
   if (expression !== '') {
     queryExpression = `expression = '${expression}'`;
@@ -71,24 +74,30 @@ export async function adminList(
 
   if (customerName !== '' && customerBirth !== '') {
     queryCustomer = `results.customer = '${customerName}_${customerBirth}'`;
+    queryCountCustomer = `customer = '${customerName}_${customerBirth}'`;
     if (prevCondition) {
       queryCustomer = ' AND ' + queryCustomer;
+      queryCountCustomer = ' AND ' + queryCountCustomer;
     }
     prevCondition = true;
   }
 
   if (dateFront !== '') {
-    queryDateFront = `time >= '${dateFront} 00:00:00'`;
+    queryDateFront = `results.time >= '${dateFront} 00:00:00'`;
+    queryCountDateFront = `time >= '${dateFront} 00:00:00'`;
     if (prevCondition) {
       queryDateFront = ' AND ' + queryDateFront;
+      queryCountDateFront = ' AND ' + queryCountDateFront;
     }
     prevCondition = true;
   }
 
   if (dateBack !== '') {
-    queryDateBack = `time <= '${dateBack} 23:59:59'`;
+    queryDateBack = `results.time <= '${dateBack} 23:59:59'`;
+    queryCountDateBack = `time <= '${dateBack} 23:59:59'`;
     if (prevCondition) {
       queryDateBack = ' AND ' + queryDateBack;
+      queryCountDateBack = ' AND ' + queryCountDateBack;
     }
     prevCondition = true;
   }
@@ -122,9 +131,9 @@ export async function adminList(
   const queryCount =
     `SELECT COUNT(*) AS count FROM ${part} WHERE ` +
     queryExpression +
-    queryCustomer +
-    queryDateFront +
-    queryDateBack +
+    queryCountCustomer +
+    queryCountDateFront +
+    queryCountDateBack +
     queryValueMin +
     queryValueMax;
 
