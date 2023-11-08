@@ -8,15 +8,25 @@ export async function readOne(id: string, pw: string) {
       [id, pw]
     );
 
-    return {
-      succeeded: true,
-      id: rows[0].id,
-    };
+    if (rows.length === 0) {
+      return {
+        noExist: true,
+        internalError: false,
+        id: null,
+      };
+    } else {
+      return {
+        noExist: false,
+        internalError: false,
+        id: rows[0].id,
+      };
+    }
   } catch (error) {
     console.error(error);
 
     return {
-      succeeded: false,
+      noExist: false,
+      internalError: true,
       id: null,
     };
   }

@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header className={style['header']}>
       <div className={style['logo']} id="header-logo">
-        <Link href={'/'}>'I' MIRROR</Link>
+        <Link href={'/customer'}>'I' MIRROR</Link>
       </div>
       <div className={style['empty']}></div>
       {customer_status === FAILED ? (

@@ -32,8 +32,11 @@ export default function customerForm() {
           birth: inputBirth,
         }),
       });
-      const { succeeded, id } = await response.json();
-      if (!succeeded) {
+      const { noExist, internalError, id } = await response.json();
+      if (noExist) {
+        alert('죄송합니다. 해당 계정이 존재하지 않습니다.');
+        setLoading(false);
+      } else if (internalError) {
         alert('죄송합니다. 문제가 발생했습니다.');
         setLoading(false);
       } else {
